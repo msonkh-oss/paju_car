@@ -261,7 +261,7 @@
    ================================ */
 const faqData = {
   blackbox: [
-    { q:"블랙박스가 고장났어요", a:"순찰차량은 특장업체에 전화, 일반차량은 블박엡체 AS신청" },
+    { q:"블랙박스가 고장났어요", a:"순찰차량은 특장업체에 전화, 일반차량은 블박업체 AS신청" },
     { q:"블랙박스가 저장이 안되요", a:"차량담당에게 문의후 메모리카드 교체" }
   ],
   lift: [
@@ -269,10 +269,7 @@ const faqData = {
   ],
   tire: [
     { q:"타이어가 마모되서 교체해야 해요", a:"타이어 메뉴에서 매장검색 가까운 매장 방문 교체" },
-    { q:"타이어 옆이 터졌어요", a:"오래되서 터진것이 아닌것은 보험접수 - 발생보고 및 온나라 공문상신 - 타이어매장에서 교체" }
-  ],
-  ids: [
-    { q:"IDS가 안나와요", a:"범에 담당자에게 전화하삼" }
+    { q:"타이어 옆이 터졌어요", a:"오래되서 터진것이 아닌것은 보험접수계 담당자에게 전화하삼" }
   ],
   microphone: [
     { q:"주먹마이크가 고장났어요", a:"주먹마이크 여분 확인 교체 또는 새로 구매후 교체" }
@@ -293,15 +290,16 @@ const tireStores = [
   { id:'tire1', name:'더타이어샵 봉일천점', phoneDisplay:'0507-8877-2848', phoneTel:'050788772848' },
   { id:'tire2', name:'티스테이션 출판단지점', phoneDisplay:'0507-4132-4321', phoneTel:'050741324321' },
   { id:'tire3', name:'한국타이어 파주교하점', phoneDisplay:'0507-2421-3319', phoneTel:'050724213319' }
+  { id:'tire4', name:'휴무' }
 ];
 
 // holidaySchedule: 날짜별 고정 매장 연결. 빈 배열 => 랜덤 표시
 const holidaySchedule = {
-  '3': { anicare: ['anicare1'], tire: ['tire1', 'tire2' ] },
+  '3': { anicare: ['anicare1', 'anicare2', 'anicare3'], tire: ['tire1', 'tire2' ] },
   '4': { anicare: ['anicare4'], tire: ['tire1', 'tire2', 'tire3'] },
-  '5': { anicare: [], tire: ['tire1', 'tire2'] },
-  '6': { anicare: [], tire: [] },
-  '7': { anicare: [], tire: ['tire2'] },
+  '5': { anicare: ['anicare2'], tire: ['tire1', 'tire2'] },
+  '6': { anicare: ['anicare3'], tire: ['tire4'] },
+  '7': { anicare: ['anicare3'], tire: ['tire2'] },
   '8': { anicare: ['anicare4'], tire: ['tire1', 'tire2'] },
   '9': { anicare: ['anicare1'], tire: ['tire1', 'tire2', 'tire3'] }
 };
@@ -411,4 +409,5 @@ window.faqData = faqData;
 </script>
 </body>
 </html>
+
 
