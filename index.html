@@ -290,7 +290,7 @@ const tireStores = [
   { id:'tire1', name:'더타이어샵 봉일천점', phoneDisplay:'0507-8877-2848', phoneTel:'050788772848' },
   { id:'tire2', name:'티스테이션 출판단지점', phoneDisplay:'0507-4132-4321', phoneTel:'050741324321' },
   { id:'tire3', name:'한국타이어 파주교하점', phoneDisplay:'0507-2421-3319', phoneTel:'050724213319' }
-  { id:'tire4', name:'휴무' }
+  
 ];
 
 // holidaySchedule: 날짜별 고정 매장 연결. 빈 배열 => 랜덤 표시
@@ -298,7 +298,7 @@ const holidaySchedule = {
   '3': { anicare: ['anicare1', 'anicare2', 'anicare3'], tire: ['tire1', 'tire2' ] },
   '4': { anicare: ['anicare4'], tire: ['tire1', 'tire2', 'tire3'] },
   '5': { anicare: ['anicare2'], tire: ['tire1', 'tire2'] },
-  '6': { anicare: ['anicare3'], tire: ['tire4'] },
+  '6': { anicare: ['anicare3'], tire: [] },
   '7': { anicare: ['anicare3'], tire: ['tire2'] },
   '8': { anicare: ['anicare4'], tire: ['tire1', 'tire2'] },
   '9': { anicare: ['anicare1'], tire: ['tire1', 'tire2', 'tire3'] }
@@ -409,5 +409,6 @@ window.faqData = faqData;
 </script>
 </body>
 </html>
+
 
 
