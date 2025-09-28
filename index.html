@@ -99,7 +99,7 @@
     .store-btn:active{ transform: translateY(1px); }
 
     /* selected (yellow) */
-    .store-btn.selected, .qa-btn.selected {
+    .store-btn.selected, .qa-btn.selected, .calendar-btn.selected {
       background: var(--select-yellow) !important;
       color: #000 !important;
       transform: scale(1.03);
@@ -132,7 +132,10 @@
     .calendar .day{ background:var(--calendar-red); color:#fff; padding:10px; border-radius:10px; font-weight:700; text-align:center; cursor:pointer; border:none; }
     .calendar-btn.selected {
       background: yellow !important;
-       color: black;
+       color: black;!important;
+}
+.store-btn.selected { background: yellow !important; }
+    
     @media (max-width:480px){
       header{ font-size:1.05rem; padding:10px; }
       .btn-main{ padding:10px; font-size:0.95rem; }
@@ -561,6 +564,7 @@
   </script>
 </body>
 </html>
+
 
 
 
