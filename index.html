@@ -24,7 +24,7 @@
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
       color:#111;
       /* LAPD 경찰차 배경 (외부 링크) */
-      background: url("https://upload.wikimedia.org/wikipedia/commons/2/2d/LAPD_Police_Car.jpg") no-repeat center center fixed;
+      background: url('./lapd-car.jpg') no-repeat center center fixed;
       background-size: cover;
       -webkit-text-size-adjust:100%;
     }
@@ -44,7 +44,7 @@
     /* --- Banner (편집 쉬움) --- */
     .banner{
       background: linear-gradient(90deg,#0f3b6f,#2b4f9e);
-      color:#fff;
+      color:#ffb4b4;
       padding:10px 12px;
       border-radius:10px;
       text-align:center;
@@ -130,7 +130,9 @@
     /* calendar */
     .calendar{ display:grid; grid-template-columns: repeat(7,1fr); gap:8px; margin-top:12px; }
     .calendar .day{ background:var(--calendar-red); color:#fff; padding:10px; border-radius:10px; font-weight:700; text-align:center; cursor:pointer; border:none; }
-
+    .calendar-btn.selected {
+      background: yellow !important;
+       color: black;
     @media (max-width:480px){
       header{ font-size:1.05rem; padding:10px; }
       .btn-main{ padding:10px; font-size:0.95rem; }
@@ -159,7 +161,7 @@
 
   <div class="container">
     <!-- ===== Banner: 텍스트만 수정하세요 ===== -->
-    <div id="banner" class="banner">[10월] 월간점검현황 : 점검율 [20]% , 정비율 [30]%</div>
+    <div id="banner" class="banner">[9월] 월간점검현황 : 점검율 [72]% , 정비율 [65]%</div>
 
     <!-- ===== Main Menu ===== -->
     <div id="mainMenu" class="main-grid">
@@ -197,7 +199,7 @@
 
       <!-- details (전화번호 표기/링크 통일) -->
       <div id="anicare1" class="store-detail">
-        <a class="phone-link" href="tel:03153903562">📞 031-5390-3562</a>
+        <a class="phone-link" href="tel:03153903562">📞 031-943-1171</a>
         <div><small>경기 파주시 금촌동 420-1</small></div>
         <iframe src="https://www.google.com/maps?q=경기+파주시+금촌동+420-1&output=embed" loading="lazy"></iframe>
       </div>
@@ -209,13 +211,13 @@
       </div>
 
       <div id="anicare3" class="store-detail">
-        <a class="phone-link" href="tel:03133191821">📞 031-3319-1821</a>
+        <a class="phone-link" href="tel:03133191821">📞 031-942-1821</a>
         <div><small>경기 파주시 탄현면 축현리 253-3</small></div>
-        <iframe src="https://www.google.com/maps?q=경기+파주시+탄현면+축현리+253-3&output=embed" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps?q=경기+파주시+탄현면+웅지로+21-3&output=embed" loading="lazy"></iframe>
       </div>
 
       <div id="anicare4" class="store-detail">
-        <a class="phone-link" href="tel:03165285353">📞 031-6528-5353</a>
+        <a class="phone-link" href="tel:03165285353">📞 031-965-5353</a>
         <div><small>경기 파주시 조리읍 장곡리 529-1</small></div>
         <iframe src="https://www.google.com/maps?q=경기+파주시+조리읍+장곡리+529-1&output=embed" loading="lazy"></iframe>
       </div>
@@ -233,7 +235,7 @@
       </div>
 
       <div id="anicare7" class="store-detail">
-        <a class="phone-link" href="tel:0319599469">📞 031-959-9469</a>
+        <a class="phone-link" href="tel:0319599469">📞 031-958-5711</a>
         <div><small>경기 파주시 법원읍 법원리 422-70</small></div>
         <iframe src="https://www.google.com/maps?q=경기+파주시+법원읍+법원리+422-70&output=embed" loading="lazy"></iframe>
       </div>
@@ -251,19 +253,19 @@
       </div>
 
       <div id="tire1" class="store-detail">
-        <a class="phone-link" href="tel:050788772848">📞 0507-8877-2848</a>
+        <a class="phone-link" href="tel:050788772848">📞 0507-1385-2849</a>
         <div><small>경기 파주시 조리읍 통일로 477-10</small></div>
         <iframe src="https://www.google.com/maps?q=경기+파주시+조리읍+통일로+477-10&output=embed" loading="lazy"></iframe>
       </div>
 
       <div id="tire2" class="store-detail">
-        <a class="phone-link" href="tel:050741324321">📞 0507-4132-4321</a>
+        <a class="phone-link" href="tel:050741324321">📞 0507-1477-1335</a>
         <div><small>경기 파주시 산남로 98</small></div>
         <iframe src="https://www.google.com/maps?q=경기+파주시+산남로+98&output=embed" loading="lazy"></iframe>
       </div>
 
       <div id="tire3" class="store-detail">
-        <a class="phone-link" href="tel:050724213319">📞 0507-2421-3319</a>
+        <a class="phone-link" href="tel:050724213319">📞 0507-1438-3340</a>
         <div><small>경기 파주시 천정구로 163-6</small></div>
         <iframe src="https://www.google.com/maps?q=경기+파주시+천정구로+163-6&output=embed" loading="lazy"></iframe>
       </div>
@@ -274,7 +276,7 @@
     <!-- ===== REPAIR ===== -->
     <section id="repair" class="submenu">
       <h2>🔧 특장수리</h2>
-      <p>업체 정보는 추후 추가 가능합니다.</p>
+      <p>업데이트 중....</p>
       <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
     </section>
 
@@ -308,6 +310,7 @@
       </div>
 
       <div id="chuseokStoreGrid" class="store-grid" style="margin-top:14px;"></div>
+<button class="calendar-btn" data-date="2025-10-03" onclick="selectCalendarDate(this)">3</button>
 
       <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
     </section>
@@ -326,46 +329,49 @@
 
     const faqData = {
       blackbox: [
-        { q: "블랙박스 설치 가능한가요?", a: "네, 설치 가능합니다. 모델별 요금은 상담 후 안내드립니다." }
+       { q:"블랙박스가 고장났어요", a:"순찰차량은 특장업체에 전화, 일반차량은 블박업체 AS신청" },
+       { q:"블랙박스가 저장이 안되요", a:"차량담당에게 문의후 메모리카드 교체" }
       ],
       equipment: [
-        { q: "리프트 점검 주기는?", a: "안전 기준에 따라 정기 점검을 권장합니다." }
+        { q:"리프트가 고장났어요", a:"리프트옆쪽에 특장업체 전화번호 확인후 AS신청" },
+        { q:"주먹마이크가 고장났어요", a:"주먹마이크 여분 확인 교체 또는 새로 구매후 교체" }
       ],
       tireFaq: [
-        { q: "타이어 교체 권장 시점은?", a: "마모도 및 연식에 따라 달라집니다. 점검 후 안내드립니다." }
+        { q:"타이어가 마모되서 교체해야 해요", a:"타이어 메뉴에서 매장검색 가까운 매장 방문 교체" },
+        { q:"타이어 옆이 터졌어요", a:"오래되서 터진것이 아닌것은 보험접수계 담당자에게 전화하삼" }
       ],
       wash: [
-        { q: "실내 세정 비용은?", a: "차종/오염도에 따라 상이합니다." }
+        { q: "세차를 하고싶어요", a: "세차비는 따로 배정되지 않습니다. 수리비에서 지급되고있는데요 세차요청서 작성해서 차량담당에게 보내주시고 카드 받아가서 세차하시고 영수증하고 반납하시면 됩니다." }
       ]
     };
 
     // 애니카랜드 — 전화번호 앞자리 모두 '031'로 통일(원하시면 여기만 수정)
     const anicareStores = [
-      { id:'anicare1', name:'애니카랜드 금촌점', phoneDisplay:'031-5390-3562', phoneTel:'03153903562', mapQ:'경기 파주시 금촌동 420-1' },
-      { id:'anicare2', name:'애니카랜드 교하운정점', phoneDisplay:'031-946-8300', phoneTel:'0319468300', mapQ:'경기 파주시 운정역길 293' },
-      { id:'anicare3', name:'애니카랜드 탄현점', phoneDisplay:'031-3319-1821', phoneTel:'03133191821', mapQ:'경기 파주시 탄현면 축현리 253-3' },
-      { id:'anicare4', name:'애니카랜드 조리점', phoneDisplay:'031-6528-5353', phoneTel:'03165285353', mapQ:'경기 파주시 조리읍 장곡리 529-1' },
-      { id:'anicare5', name:'애니카랜드 교하점', phoneDisplay:'031-957-2266', phoneTel:'0319572266', mapQ:'경기 파주시 문발동 44-9' },
-      { id:'anicare6', name:'애니카랜드 문산점', phoneDisplay:'031-954-0951', phoneTel:'0319540951', mapQ:'경기 파주시 문산읍 선유리 767-3' },
-      { id:'anicare7', name:'애니카랜드 법원점', phoneDisplay:'031-959-9469', phoneTel:'0319599469', mapQ:'경기 파주시 법원읍 법원리 422-70' }
+      { id:'anicare1', name:'애니카랜드 금촌점', phoneTel:'03153903562', mapQ:'경기 파주시 금촌동 420-1' },
+      { id:'anicare2', name:'애니카랜드 교하운정점', phoneTel:'0319468300', mapQ:'경기 파주시 운정역길 293' },
+      { id:'anicare3', name:'애니카랜드 탄현점',  phoneTel:'03133191821', mapQ:'경기 파주시 탄현면 축현리 253-3' },
+      { id:'anicare4', name:'애니카랜드 조리점',  phoneTel:'03165285353', mapQ:'경기 파주시 조리읍 장곡리 529-1' },
+      { id:'anicare5', name:'애니카랜드 교하점',  phoneTel:'0319572266', mapQ:'경기 파주시 문발동 44-9' },
+      { id:'anicare6', name:'애니카랜드 문산점',  phoneTel:'0319540951', mapQ:'경기 파주시 문산읍 선유리 767-3' },
+      { id:'anicare7', name:'애니카랜드 법원점',  phoneTel:'0319599469', mapQ:'경기 파주시 법원읍 법원리 422-70' }
     ];
 
     // 타이어 매장 — 전화번호 모두 0507로 통일 (원하시면 값만 수정)
     const tireStores = [
-      { id:'tire1', name:'더타이어샵 봉일천점', phoneDisplay:'0507-8877-2848', phoneTel:'050788772848', mapQ:'경기 파주시 조리읍 통일로 477-10' },
-      { id:'tire2', name:'티스테이션 출판단지점', phoneDisplay:'0507-4132-4321', phoneTel:'050741324321', mapQ:'경기 파주시 산남로 98' },
-      { id:'tire3', name:'한국타이어 파주교하점', phoneDisplay:'0507-2421-3319', phoneTel:'050724213319', mapQ:'경기 파주시 천정구로 163-6' }
+      { id:'tire1', name:'더타이어샵 봉일천점',  phoneTel:'050788772848', mapQ:'경기 파주시 조리읍 통일로 477-10' },
+      { id:'tire2', name:'티스테이션 출판단지점', phoneTel:'050741324321', mapQ:'경기 파주시 산남로 98' },
+      { id:'tire3', name:'한국타이어 파주교하점', phoneTel:'050724213319', mapQ:'경기 파주시 천정구로 163-6' }
     ];
 
     // holidaySchedule: 날짜별 고정 매장 (비워두면 랜덤으로 표시)
     const holidaySchedule = {
-      '3': { anicare: [], tire: [] },
-      '4': { anicare: [], tire: [] },
-      '5': { anicare: [], tire: [] },
-      '6': { anicare: [], tire: [] },
-      '7': { anicare: [], tire: [] },
-      '8': { anicare: [], tire: [] },
-      '9': { anicare: [], tire: [] }
+      '3': { anicare: ['anicare1', 'anicare2', 'anicare3'], tire: ['tire1', 'tire2' ] },
+      '4': { anicare: ['anicare4'], tire: ['tire1', 'tire2', 'tire3'] },
+      '5': { anicare: ['anicare2'], tire: ['tire1', 'tire2'] },
+      '6': { anicare: ['anicare3'], tire: [] },
+      '7': { anicare: ['anicare3'], tire: ['tire2'] },
+      '8': { anicare: ['anicare4'], tire: ['tire1', 'tire2'] },
+      '9': { anicare: ['anicare1'], tire: ['tire1', 'tire2', 'tire3'] }
     };
 
     /* ===========================================================
@@ -512,6 +518,17 @@
         area.appendChild(note);
         return;
       }
+         function selectCalendarDate(btn) {
+  // 모든 날짜 버튼에서 선택 클래스 제거
+  document.querySelectorAll('.calendar-btn').forEach(el => el.classList.remove('selected'));
+  
+  // 클릭된 버튼만 선택
+  btn.classList.add('selected');
+
+  // 여기서 매장 표시 로직 실행 (랜덤 매장 불러오기 등)
+  showStoresForDate(btn.dataset.date);
+  }
+   
       items.forEach(it=>{
         const wrap = document.createElement('div'); wrap.className='qa-item';
         const q = document.createElement('div'); q.className='qa-q'; q.textContent = 'Q. ' + it.q;
@@ -544,3 +561,4 @@
   </script>
 </body>
 </html>
+
