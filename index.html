@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
@@ -6,24 +6,23 @@
 <title>파주서 차량관리</title>
 <style>
   :root{
-    --bg1:#fbf6ef;  /* 따뜻한 파스텔 배경(이미지 제거) */
-    --bg2:#fffdf9;
-    --navy:#113a7a;
-    --muted:#6b7280;
-    --call:#10b981;
-    --holiday:#e63946;
-    --select:#facc15;
+    --bg1:#fbf6ef; --bg2:#fffdf9;
+    --navy:#113a7a; --muted:#6b7280; --call:#10b981;
+    --holiday:#e63946; --select:#facc15;
   }
   html,body{height:100%;margin:0;padding:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
   body{background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#111;-webkit-text-size-adjust:100%}
-  .wrap{max-width:920px;margin:18px auto;padding:12px}
+  .wrap{max-width:920px;margin:16px auto;padding:12px}
   header{background:#fff;padding:12px;border-radius:10px;text-align:center;font-weight:800;color:var(--navy);box-shadow:0 6px 18px rgba(0,0,0,0.04)}
-  .banner{margin:12px 0;padding:10px;border-radius:10px;background:#fff7e8;border:1px solid #f1dcc2;font-weight:700;text-align:center}
+  #banner{margin:12px 0;padding:10px;border-radius:10px;background:#fff7e8;border:1px solid #f1dcc2;font-weight:700;text-align:center}
+
+  /* main menu */
   .main-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
   .btn-main{padding:12px;border-radius:12px;border:0;background:linear-gradient(180deg,var(--navy),#0b2a4a);color:#fff;font-weight:800;cursor:pointer}
   .btn-calendar{background:var(--holiday)}
-  .submenu{display:none;margin-top:12px}
-  .section-head{font-weight:800;margin-bottom:8px}
+  .hidden{display:none;margin-top:12px}
+
+  /* stores */
   .store-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
   .store-btn{padding:10px;border-radius:10px;border:0;background:#164a85;color:#fff;font-weight:700;cursor:pointer;text-align:center}
   .store-btn:hover{transform:translateY(-2px)}
@@ -32,17 +31,27 @@
   .phone-link{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--call);color:#fff;font-weight:700;text-decoration:none}
   .map-link{display:inline-block;margin-left:8px;padding:8px 10px;border-radius:8px;border:1px solid #ddd;background:#fff;color:var(--navy);text-decoration:none;font-weight:700}
   .back-btn{margin-top:12px;padding:10px 14px;border-radius:10px;background:var(--muted);color:#fff;border:0;cursor:pointer}
+
+  /* Q&A */
   .qa-area{margin-top:12px;text-align:left}
+  .qa-cat-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .qa-cat-btn{padding:8px 10px;border-radius:8px;border:0;background:#fff7e8;cursor:pointer;font-weight:700}
+  .qa-cat-btn.active{background:var(--select);color:#000}
   .qa-category{margin-bottom:12px;border-radius:10px;background:#fff;box-shadow:0 6px 12px rgba(0,0,0,0.04);overflow:hidden}
-  .qa-cat-header{padding:10px 12px;display:flex;justify-content:space-between;cursor:pointer;font-weight:700}
-  .qa-list{display:none;padding:10px}
+  .qa-list{padding:8px}
   .qa-item{padding:8px;border-radius:8px;background:#fff;margin-bottom:8px;box-shadow:0 3px 8px rgba(0,0,0,0.03)}
   .qa-q{font-weight:700;cursor:pointer}
   .qa-a{display:none;margin-top:6px;color:#333}
+
+  /* calendar */
   .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:12px}
   .calendar .day{background:var(--holiday);color:#fff;padding:10px;border-radius:10px;font-weight:700;text-align:center;border:0;cursor:pointer}
   .calendar .day.selected{background:var(--select);color:#000}
-  @media(max-width:480px){ .calendar{grid-template-columns:repeat(4,1fr)} .store-grid{grid-template-columns:repeat(2,1fr)} }
+
+  @media(max-width:480px){
+    .calendar{grid-template-columns:repeat(4,1fr)}
+    .store-grid{grid-template-columns:repeat(2,1fr)}
+  }
 </style>
 </head>
 <body>
@@ -61,9 +70,7 @@
 
 <div class="wrap">
   <header>🚓 파주서 차량관리</header>
-
-  <!-- EDITABLE: 배너 [] 안의 텍스트만 자주 수정 -->
-  <div id="banner" class="banner">[10월] 월간점검현황 : 점검율 [20]% , 정비율 [30]%</div>
+  <div id="banner">[10월] 월간점검현황 : 점검율 [20]% , 정비율 [30]%</div>
 
   <!-- MAIN MENU -->
   <div id="mainMenu" class="main-grid" style="display:grid">
@@ -76,8 +83,8 @@
   </div>
 
   <!-- ACCIDENT -->
-  <section id="accident" class="submenu">
-    <div class="section-head">📞 사고접수</div>
+  <section id="accident" class="hidden">
+    <div style="font-weight:800;margin-bottom:8px">📞 사고접수</div>
     <div class="store-grid">
       <a class="store-btn" href="tel:15666881">삼성화재 1566-6881</a>
       <a class="store-btn" href="tel:15661228">애니카 긴급출동 1566-1228</a>
@@ -86,122 +93,114 @@
   </section>
 
   <!-- ANICARE -->
-  <section id="anicare" class="submenu">
-    <div class="section-head">🏪 애니카랜드</div>
+  <section id="anicare" class="hidden">
+    <div style="font-weight:800;margin-bottom:8px">🏪 애니카랜드</div>
     <div class="store-grid" id="anicareGrid">
-      <button class="store-btn" data-storeid="anicare1" onclick="toggleStore('anicare1')">금촌점</button>
-      <button class="store-btn" data-storeid="anicare2" onclick="toggleStore('anicare2')">교하운정점</button>
-      <button class="store-btn" data-storeid="anicare3" onclick="toggleStore('anicare3')">탄현점</button>
-      <button class="store-btn" data-storeid="anicare4" onclick="toggleStore('anicare4')">조리점</button>
-      <button class="store-btn" data-storeid="anicare5" onclick="toggleStore('anicare5')">교하점</button>
-      <button class="store-btn" data-storeid="anicare6" onclick="toggleStore('anicare6')">문산점</button>
-      <button class="store-btn" data-storeid="anicare7" onclick="toggleStore('anicare7')">법원점</button>
+      <button class="store-btn" data-storeid="anicare1" onclick="toggleStore('anicare1', this)">금촌점</button>
+      <button class="store-btn" data-storeid="anicare2" onclick="toggleStore('anicare2', this)">교하운정점</button>
+      <button class="store-btn" data-storeid="anicare3" onclick="toggleStore('anicare3', this)">탄현점</button>
+      <button class="store-btn" data-storeid="anicare4" onclick="toggleStore('anicare4', this)">조리점</button>
+      <button class="store-btn" data-storeid="anicare5" onclick="toggleStore('anicare5', this)">교하점</button>
+      <button class="store-btn" data-storeid="anicare6" onclick="toggleStore('anicare6', this)">문산점</button>
+      <button class="store-btn" data-storeid="anicare7" onclick="toggleStore('anicare7', this)">법원점</button>
     </div>
 
-    <!-- DETAILS (전화번호/주소, 네이버 링크로 변경) -->
+    <!-- details (전화번호/주소 + 네이버 링크) -->
     <div id="anicare1" class="store-detail">
       <a class="phone-link" href="tel:03153903562">📞 031-5390-3562</a>
       <div><small>경기 파주시 금촌동 420-1</small>
-      <!-- MODIFIED: removed Google iframe → replaced with Naver map link to reduce traffic -->
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20금촌동%20420-1" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20금촌동%20420-1" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="anicare2" class="store-detail">
       <a class="phone-link" href="tel:0319468300">📞 031-946-8300</a>
       <div><small>경기 파주시 운정역길 293</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20운정역길%20293" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20운정역길%20293" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="anicare3" class="store-detail">
       <a class="phone-link" href="tel:03133191821">📞 031-3319-1821</a>
       <div><small>경기 파주시 탄현면 축현리 253-3</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20탄현면%20축현리%20253-3" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20탄현면%20축현리%20253-3" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="anicare4" class="store-detail">
       <a class="phone-link" href="tel:03165285353">📞 031-6528-5353</a>
       <div><small>경기 파주시 조리읍 장곡리 529-1</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20장곡리%20529-1" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20장곡리%20529-1" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="anicare5" class="store-detail">
       <a class="phone-link" href="tel:0319572266">📞 031-957-2266</a>
       <div><small>경기 파주시 문발동 44-9</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20문발동%2044-9" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20문발동%2044-9" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="anicare6" class="store-detail">
       <a class="phone-link" href="tel:0319540951">📞 031-954-0951</a>
       <div><small>경기 파주시 문산읍 선유리 767-3</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20문산읍%20선유리%20767-3" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20문산읍%20선유리%20767-3" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="anicare7" class="store-detail">
       <a class="phone-link" href="tel:0319599469">📞 031-959-9469</a>
       <div><small>경기 파주시 법원읍 법원리 422-70</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20법원읍%20법원리%20422-70" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20법원읍%20법원리%20422-70" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
   <!-- TIRE -->
-  <section id="tire" class="submenu">
-    <div class="section-head">🛞 타이어</div>
+  <section id="tire" class="hidden">
+    <div style="font-weight:800;margin-bottom:8px">🛞 타이어</div>
     <div class="store-grid" id="tireGrid">
-      <button class="store-btn" data-storeid="tire1" onclick="toggleStore('tire1')">더타이어샵 봉일천점</button>
-      <button class="store-btn" data-storeid="tire2" onclick="toggleStore('tire2')">티스테이션 출판단지점</button>
-      <button class="store-btn" data-storeid="tire3" onclick="toggleStore('tire3')">한국타이어 파주교하점</button>
+      <button class="store-btn" data-storeid="tire1" onclick="toggleStore('tire1', this)">더타이어샵 봉일천점</button>
+      <button class="store-btn" data-storeid="tire2" onclick="toggleStore('tire2', this)">티스테이션 출판단지점</button>
+      <button class="store-btn" data-storeid="tire3" onclick="toggleStore('tire3', this)">한국타이어 파주교하점</button>
     </div>
 
     <div id="tire1" class="store-detail">
       <a class="phone-link" href="tel:050788772848">📞 0507-8877-2848</a>
       <div><small>경기 파주시 조리읍 통일로 477-10</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20통일로%20477-10" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20통일로%20477-10" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="tire2" class="store-detail">
       <a class="phone-link" href="tel:050741324321">📞 0507-4132-4321</a>
       <div><small>경기 파주시 산남로 98</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20산남로%2098" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20산남로%2098" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="tire3" class="store-detail">
       <a class="phone-link" href="tel:050724213319">📞 0507-2421-3319</a>
       <div><small>경기 파주시 천정구로 163-6</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20천정구로%20163-6" target="_blank" rel="noopener">네이버지도 보기</a>
-      </div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20천정구로%20163-6" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
   <!-- REPAIR -->
-  <section id="repair" class="submenu">
-    <div class="section-head">🔧 특장수리</div>
+  <section id="repair" class="hidden">
+    <div style="font-weight:800;margin-bottom:8px">🔧 특장수리</div>
     <p>업체 정보는 추후 추가 가능합니다.</p>
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
   <!-- Q&A -->
-  <section id="qa" class="submenu">
-    <div class="section-head">❓ Q&A</div>
-    <div id="qaArea" class="qa-area"></div>
+  <section id="qa" class="hidden">
+    <div style="font-weight:800;margin-bottom:8px">❓ Q&A</div>
+    <div class="qa-area">
+      <div class="qa-cat-bar" id="qaCatBar"></div>
+      <div id="qaList" class="qa-list"></div>
+    </div>
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
   <!-- CHUSEOK -->
-  <section id="chuseok" class="submenu">
-    <div class="section-head">🍂 25년 추석연휴 (2025-10-03 ~ 2025-10-09)</div>
+  <section id="chuseok" class="hidden">
+    <div style="font-weight:800;margin-bottom:8px">🍂 25년 추석연휴 (2025-10-03 ~ 2025-10-09)</div>
     <div class="calendar" role="list" aria-label="추석 달력">
       <button class="day" data-day="3" onclick="selectDay(this)">10/3</button>
       <button class="day" data-day="4" onclick="selectDay(this)">10/4</button>
@@ -218,7 +217,9 @@
 </div> <!-- wrap -->
 
 <script>
-/* ========== 데이터 (절대 수정하지 않을 항목들 그대로 유지) ========== */
+/* ===========================
+   Q&A / 매장 데이터 (원본 텍스트 그대로 유지)
+   =========================== */
 const faqData = {
   blackbox: [
     { q:"블랙박스가 고장났어요", a:"순찰차량은 특장업체에 전화, 일반차량은 블박업체 AS신청" },
@@ -233,7 +234,9 @@ const faqData = {
   ],
   microphone: [
     { q:"주먹마이크가 고장났어요", a:"주먹마이크 여분 확인 교체 또는 새로 구매후 교체" }
-  ]
+  ],
+  wash: [ /* 빈배열 — 세차 항목은 필요 시 추가하세요 */ ],
+  etc: [ /* 빈배열 — 기타 질문 추가 가능 */ ]
 };
 
 const anicareStores = [
@@ -262,115 +265,163 @@ const holidaySchedule = {
   '9': { anicare: ['anicare1'], tire: ['tire1', 'tire2', 'tire3'] }
 };
 
-/* ========== 유틸/렌더 (최소한의 코드로 유지) ========== */
+/* ===========================
+   UI 로직 (최소한의 코드로 확실히 동작)
+   =========================== */
 function openMenu(id){
   document.getElementById('mainMenu').style.display='none';
-  document.querySelectorAll('.submenu').forEach(s=>s.style.display='none');
-  const el=document.getElementById(id); if(el) el.style.display='block';
+  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+  const el = document.getElementById(id);
+  if(el) el.classList.remove('hidden');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function backToMain(){
-  document.querySelectorAll('.submenu').forEach(s=>s.style.display='none');
+  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
   document.getElementById('mainMenu').style.display='grid';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* toggle store detail and selected btn */
-function toggleStore(id){
-  // hide other details, toggle this one
+/* 토글 매장 상세 + 시각적 선택(노랑) */
+function toggleStore(id, btnElem){
+  // toggle detail visibility
   document.querySelectorAll('.store-detail').forEach(d=>{
-    d.style.display = (d.id===id && d.style.display!=='block') ? 'block' : 'none';
+    d.style.display = (d.id === id && d.style.display !== 'block') ? 'block' : 'none';
+    if(d.style.display==='block') d.scrollIntoView({behavior:'smooth', block:'center'});
   });
-  // update visual selected on any button with matching data-storeid
+  // clear selection on all store buttons
   document.querySelectorAll('.store-btn').forEach(b=> b.classList.remove('selected'));
+  // add selected to any buttons that represent this store (main list + dynamic ones)
   document.querySelectorAll('[data-storeid="'+id+'"]').forEach(b=> b.classList.add('selected'));
+  // also highlight clicked element if provided (useful for chuseok dynamic buttons)
+  if(btnElem) btnElem.classList.add('selected');
 }
 
-/* pick n random */
+/* 랜덤선택 유틸 */
 function pickRandom(arr,n){
-  const c = arr.slice(), out = [];
-  while(out.length < n && c.length){
-    const i = Math.floor(Math.random() * c.length);
+  const c=arr.slice(), out=[];
+  while(out.length<n && c.length){
+    const i=Math.floor(Math.random()*c.length);
     out.push(c.splice(i,1)[0]);
   }
   return out;
 }
 
-/* show chuseok stores (uses holidaySchedule or random) */
+/* 추석 매장 표시 (정해져있으면 그거, 없으면 랜덤) */
 function showChuseokStores(day){
   const grid = document.getElementById('chuseokStoreGrid'); grid.innerHTML='';
   const sched = holidaySchedule[day];
   let anicareToShow = [], tireToShow = [];
   if(sched && ((sched.anicare && sched.anicare.length) || (sched.tire && sched.tire.length))){
-    if(sched.anicare) anicareToShow = sched.anicare.map(id => anicareStores.find(s=>s.id===id)).filter(Boolean);
-    if(sched.tire) tireToShow = sched.tire.map(id => tireStores.find(s=>s.id===id)).filter(Boolean);
+    if(sched.anicare) anicareToShow = sched.anicare.map(id=> anicareStores.find(s=>s.id===id)).filter(Boolean);
+    if(sched.tire) tireToShow = sched.tire.map(id=> tireStores.find(s=>s.id===id)).filter(Boolean);
   } else {
     anicareToShow = pickRandom(anicareStores, Math.min(3, anicareStores.length));
     tireToShow = pickRandom(tireStores, Math.min(3, tireStores.length));
   }
 
+  // header
   const header = document.createElement('div'); header.style.gridColumn='1/-1'; header.style.fontWeight='700'; header.style.textAlign='left'; header.style.padding='6px 0';
-  header.textContent = `10/${day} 영업 매장 — 애니카 ${anicareToShow.length}곳 · 타이어 ${tireToShow.length}곳`; grid.appendChild(header);
+  header.textContent = `10/${day} 영업 매장 — 애니카 ${anicareToShow.length}곳 · 타이어 ${tireToShow.length}곳`;
+  grid.appendChild(header);
 
+  // anicare
   anicareToShow.forEach(s=>{
     const btn = document.createElement('button'); btn.className='store-btn'; btn.setAttribute('data-storeid', s.id);
     btn.textContent = `애니카 • ${s.name} (${s.phoneDisplay})`;
-    btn.onclick = function(){ openMenu('anicare'); setTimeout(()=> toggleStore(s.id), 160); };
+    btn.onclick = function(){
+      // visual selection
+      document.querySelectorAll('.store-btn').forEach(b=> b.classList.remove('selected'));
+      btn.classList.add('selected');
+      openMenu('anicare');
+      setTimeout(()=> toggleStore(s.id), 160);
+    };
     grid.appendChild(btn);
   });
 
+  // tire
   tireToShow.forEach(s=>{
     const btn = document.createElement('button'); btn.className='store-btn'; btn.setAttribute('data-storeid', s.id);
     btn.textContent = `타이어 • ${s.name} (${s.phoneDisplay})`;
-    btn.onclick = function(){ openMenu('tire'); setTimeout(()=> toggleStore(s.id), 160); };
+    btn.onclick = function(){
+      document.querySelectorAll('.store-btn').forEach(b=> b.classList.remove('selected'));
+      btn.classList.add('selected');
+      openMenu('tire');
+      setTimeout(()=> toggleStore(s.id), 160);
+    };
     grid.appendChild(btn);
   });
 }
 
-/* calendar day selection (visual) */
+/* 달력 날짜 선택(시각 효과 + 매장표시) */
 function selectDay(btn){
-  document.querySelectorAll('.calendar .day').forEach(d=>d.classList.remove('selected'));
+  document.querySelectorAll('.calendar .day').forEach(d=> d.classList.remove('selected'));
   btn.classList.add('selected');
   showChuseokStores(btn.dataset.day);
 }
 
-/* render Q&A */
+/* Q&A 렌더: 카테고리 버튼 생성 + 항목 렌더
+   - categories: 블랙박스, 특수장비(lift), 타이어, 세차(wash), 기타(etc+microphone)
+   - 기존 faqData는 변경하지 않음; microphone 항목은 기타에 함께 표시
+*/
 function renderFAQ(){
-  const area = document.getElementById('qaArea'); area.innerHTML='';
-  const categories = { blackbox:"📹 블랙박스", lift:"🛠 리프트", tire:"🛞 타이어", ids:"💡 IDS", microphone:"🎤 주먹마이크" };
-  Object.keys(categories).forEach(key=>{
-    const wrap = document.createElement('div'); wrap.className='qa-category';
-    const header = document.createElement('div'); header.className='qa-cat-header'; header.innerHTML = `<div>${categories[key]}</div><div style="opacity:.7">▼</div>`;
-    const list = document.createElement('div'); list.className='qa-list';
-    const items = faqData[key] || [];
-    if(items.length === 0){
-      const note = document.createElement('div'); note.style.padding='10px'; note.style.color='#666'; note.style.background='#fff'; note.style.borderRadius='8px';
-      note.textContent = '질문이 없습니다. faqData.' + key + ' 에 항목을 추가해 주세요.';
-      list.appendChild(note);
-    } else {
-      items.forEach(it=>{
-        const itemDiv = document.createElement('div'); itemDiv.className='qa-item';
-        const qDiv = document.createElement('div'); qDiv.className='qa-q'; qDiv.textContent = 'Q. ' + it.q;
-        const aDiv = document.createElement('div'); aDiv.className='qa-a'; aDiv.innerHTML = 'A. ' + it.a;
-        qDiv.addEventListener('click', ()=> aDiv.style.display = (aDiv.style.display==='block')? 'none':'block');
-        itemDiv.appendChild(qDiv); itemDiv.appendChild(aDiv); list.appendChild(itemDiv);
-      });
+  const catBar = document.getElementById('qaCatBar');
+  const list = document.getElementById('qaList');
+  catBar.innerHTML=''; list.innerHTML='';
+
+  const categories = {
+    blackbox:'📹 블랙박스',
+    lift:'🛠 특수장비',
+    tire:'🛞 타이어',
+    wash:'🧽 세차',
+    etc:'📌 기타'
+  };
+
+  function getItems(key){
+    if(key === 'etc'){
+      // 기타는 faqData.etc + faqData.microphone(주먹마이크) 항목을 표시해 기존 Q&A 유실 없게 함
+      return (faqData.etc || []).concat(faqData.microphone || []);
     }
-    header.addEventListener('click', ()=> list.style.display = list.style.display==='block' ? 'none' : 'block');
-    wrap.appendChild(header); wrap.appendChild(list); area.appendChild(wrap);
+    return faqData[key] || [];
+  }
+
+  Object.keys(categories).forEach((k, idx)=>{
+    const b = document.createElement('button'); b.className='qa-cat-btn'; b.textContent = categories[k];
+    b.onclick = function(){
+      // visual active
+      document.querySelectorAll('.qa-cat-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      // render items
+      const items = getItems(k);
+      list.innerHTML = '';
+      if(items.length === 0){
+        const note = document.createElement('div'); note.style.padding='10px'; note.style.color='#666'; note.textContent = '질문이 없습니다. faqData.'+k+' 에 항목을 추가해 주세요.';
+        list.appendChild(note);
+      } else {
+        items.forEach(it=>{
+          const item = document.createElement('div'); item.className='qa-item';
+          const q = document.createElement('div'); q.className='qa-q'; q.textContent = 'Q. '+it.q;
+          const a = document.createElement('div'); a.className='qa-a'; a.innerHTML = 'A. '+it.a;
+          q.addEventListener('click', ()=> a.style.display = a.style.display==='block' ? 'none' : 'block');
+          item.appendChild(q); item.appendChild(a); list.appendChild(item);
+        });
+      }
+    };
+    catBar.appendChild(b);
+    // auto-click first category
+    if(idx===0) b.click();
   });
 }
 
 /* init */
 function init(){
-  renderFAQ();
   document.getElementById('mainMenu').style.display='grid';
-  document.querySelectorAll('.submenu').forEach(s=> s.style.display='none');
+  document.querySelectorAll('section').forEach(s=> s.classList.add('hidden'));
   document.querySelectorAll('.store-detail').forEach(d=> d.style.display='none');
+  renderFAQ();
 }
 window.addEventListener('load', init);
 
-/* expose for console editing if needed */
+/* expose for quick console edits if needed */
 window.anicareStores = anicareStores;
 window.tireStores = tireStores;
 window.holidaySchedule = holidaySchedule;
