@@ -50,12 +50,35 @@
 
   .back-btn{ margin-top:12px; padding:10px 14px; border-radius:10px; background:var(--muted); color:#fff; border:0; cursor:pointer; font-weight:800 }
 
-  /* Q&A */
-  .qa-top{ display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; -webkit-overflow-scrolling:touch; }
-  .qa-top::-webkit-scrollbar{ height:0; }
-  .qa-tab{ flex:0 0 auto; padding:10px 12px; border-radius:10px; background:#fff7e8; border:0; font-weight:800; cursor:pointer; min-width:120px; text-align:center }
+  /* Q&A - 변경된 레이아웃 (원본 기능은 그대로) */
+  .qa-panel{
+    display: grid;
+    grid-template-columns: 220px 1fr; /* 좌측 카테고리, 우측 리스트 */
+    gap: 12px;
+    align-items: start;
+  }
+  .qa-top{
+    display:flex;
+    flex-direction:column;     /* 한 화면에 보이도록 세로 정렬 */
+    gap:8px;
+    overflow:auto;
+    max-height:60vh;          /* 필요시 스크롤 (모바일/긴 목록 안전) */
+    padding-right:6px;
+  }
+  .qa-top::-webkit-scrollbar{ width:6px; }
+  .qa-tab{
+    display:block;
+    width:100%;
+    padding:10px 12px;
+    border-radius:10px;
+    background:#fff7e8;
+    border:0;
+    font-weight:800;
+    cursor:pointer;
+    text-align:left;
+  }
   .qa-tab.active{ background:var(--select); color:#111 }
-  .qa-list{ margin-top:10px }
+  .qa-list{ margin-top:0 } /* 오른쪽 콘텐츠는 qa-panel 내부에 있으므로 상단여백 제거 */
   .qa-item{ padding:12px; border-radius:10px; background:#fff; margin-bottom:10px; box-shadow:0 4px 12px rgba(0,0,0,0.04) }
   .qa-q{ font-weight:800; cursor:pointer }
   .qa-a{ display:none; margin-top:8px; color:#333 }
@@ -64,6 +87,12 @@
   .calendar{ display:grid; grid-template-columns: repeat(7,1fr); gap:8px; margin-top:8px; }
   .calendar .day{ background:var(--holiday); color:#fff; padding:12px; border-radius:8px; font-weight:800; cursor:pointer; border:0; }
   .calendar .day.selected{ background:var(--select); color:#111; }
+
+  @media(max-width:840px){
+    .qa-panel{ grid-template-columns: 1fr; } /* 모바일에서 카테고리 위, 목록 아래로 스택 */
+    .qa-top{ flex-direction:row; overflow-x:auto; max-height:none; gap:8px; padding:0 6px; }
+    .qa-tab{ min-width:120px; white-space:nowrap; text-align:center; }
+  }
 
   @media(max-width:640px){
     .main-btn{ width:92%; font-size:1rem; padding:13px 14px; }
@@ -199,15 +228,20 @@
   <!-- REPAIR -->
   <section id="repair" class="hidden">
     <div style="font-weight:800;margin-bottom:8px">🔧 특장수리</div>
-    <p>업체 정보는 추후 추가 가능합니다.</p>
+    <p>업데이트 중........</p>
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
   <!-- Q&A -->
   <section id="qa" class="hidden">
     <div style="font-weight:800;margin-bottom:8px">❓ Q&A</div>
-    <div class="qa-top" id="qaCatBar" aria-hidden="false"></div>
-    <div id="qaList" class="qa-list"></div>
+
+    <!-- 변경: 한 화면에 카테고리(왼쪽) + 리스트(오른쪽) 보이도록 패널 추가 -->
+    <div class="qa-panel">
+      <div class="qa-top" id="qaCatBar" aria-hidden="false"></div>
+      <div id="qaList" class="qa-list"></div>
+    </div>
+
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
@@ -247,14 +281,18 @@ const faqData = {
     { q:"타이어 옆이 터졌어요", a:"오래되서 터진것이 아닌것은 애니카에서 승인을 안해줍니다(다행히 승인해주면 그냥 교체하심됨) 보험접수+발생보고+온나라공문 후 타이어 교체" }
   ],
   microphone: [
-    { q:"주먹마이크가 고장났어요", a:"주먹마이크 여분 확인 교체 또는 새로 구매후 교체" }
+    { q:"주먹마이크가 고장났어요", a:"주먹마이크 여분 확인 교체 또는 새로 구매후 교체" },
+    { q:"무전기가 안돼요", a:"정장계 무선담당에게 문의하시면 됩니다." }
   ],
   wash: [
     { q:"차내부가 지져분해서 세차를 하고 싶어요", a:"현재 세차비는 따로 배정되지 않고 있습니다. 수리비에서 지급중인데요 세차가 필요하시면 세차요청서 하나 보내주시고 카드 받아가서 세차하시고 카드+영수증 반납하시면 됩니다." }
   ],
   etc: [
     { q:"IDS가 안나와요", a:"IDS는 범예에 일단 문의 하셔야 합니다." },
-    { q:"무전기가 안돼요", a:"무전기는 정장계 무선담당에게 문의하시면 됩니다." }
+    { q:"무전기가 안돼요", a:"무전기는 정장계 무선담당에게 문의하시면 됩니다." },
+    { q:"사고가 났어요(피해차량)", a:"(피해차량인 경우) 폴넷 교통사고 발생보고 - 온나라 공문(대차료 때문) - 공업사 입고 수리 },
+    { q:"사고가 났어요(가해차량)", a:"(가해차량인 경우) 폴넷 교통사고 발생보고 - 온나라공문(수리비 때문) - 공업사 입고수리 - 차량담당에게 통보" },
+     { q:"데칼(마크)가 손상됐어요", a:"데칼(마크) 까지 수리하실려면 조리읍에 있는 두원현대서비스에서 수리하시면 됩니다." }
        ]
 };
 
@@ -278,7 +316,7 @@ const holidaySchedule = {
   '3': { anicare: ['anicare1','anicare2','anicare3'], tire: ['tire1','tire2'] },
   '4': { anicare: ['anicare4'], tire: ['tire1','tire2','tire3'] },
   '5': { anicare: ['anicare2'], tire: ['tire1','tire2'] },
-  '6': { anicare: ['anicare3'], tire: [] },
+  '6': { anicare: [], tire: [] },
   '7': { anicare: ['anicare3'], tire: ['tire2'] },
   '8': { anicare: ['anicare4'], tire: ['tire1','tire2'] },
   '9': { anicare: ['anicare1'], tire: ['tire1','tire2','tire3'] }
@@ -491,4 +529,3 @@ window.faqData = faqData;
 </script>
 </body>
 </html>
-
