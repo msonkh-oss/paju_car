@@ -70,7 +70,7 @@
 
 <div class="wrap">
   <header>🚓 파주서 차량관리</header>
-  <div id="banner">[10월] 월간점검현황 : 점검율 [20]% , 정비율 [30]%</div>
+  <div id="banner">[9월] 월간점검현황 : 점검율 [79]% , 정비율 [68]%</div>
 
   <!-- MAIN MENU -->
   <div id="mainMenu" class="main-grid" style="display:grid">
@@ -107,7 +107,7 @@
 
     <!-- details (전화번호/주소 + 네이버 링크) -->
     <div id="anicare1" class="store-detail">
-      <a class="phone-link" href="tel:03153903562">📞 031-5390-3562</a>
+      <a class="phone-link" href="tel:03153903562">📞 031-943-1171</a>
       <div><small>경기 파주시 금촌동 420-1</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20금촌동%20420-1" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
@@ -119,13 +119,13 @@
     </div>
 
     <div id="anicare3" class="store-detail">
-      <a class="phone-link" href="tel:03133191821">📞 031-3319-1821</a>
+      <a class="phone-link" href="tel:03133191821">📞 031-942-1821</a>
       <div><small>경기 파주시 탄현면 축현리 253-3</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20탄현면%20축현리%20253-3" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="anicare4" class="store-detail">
-      <a class="phone-link" href="tel:03165285353">📞 031-6528-5353</a>
+      <a class="phone-link" href="tel:03165285353">📞 031-965-5353</a>
       <div><small>경기 파주시 조리읍 장곡리 529-1</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20장곡리%20529-1" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
@@ -143,7 +143,7 @@
     </div>
 
     <div id="anicare7" class="store-detail">
-      <a class="phone-link" href="tel:0319599469">📞 031-959-9469</a>
+      <a class="phone-link" href="tel:0319599469">📞 031-958-5711</a>
       <div><small>경기 파주시 법원읍 법원리 422-70</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20법원읍%20법원리%20422-70" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
@@ -161,19 +161,19 @@
     </div>
 
     <div id="tire1" class="store-detail">
-      <a class="phone-link" href="tel:050788772848">📞 0507-8877-2848</a>
+      <a class="phone-link" href="tel:050788772848">📞 0507-1385-2849</a>
       <div><small>경기 파주시 조리읍 통일로 477-10</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20통일로%20477-10" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="tire2" class="store-detail">
-      <a class="phone-link" href="tel:050741324321">📞 0507-4132-4321</a>
+      <a class="phone-link" href="tel:050741324321">📞 0507-1477-1335</a>
       <div><small>경기 파주시 산남로 98</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20산남로%2098" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
 
     <div id="tire3" class="store-detail">
-      <a class="phone-link" href="tel:050724213319">📞 0507-2421-3319</a>
+      <a class="phone-link" href="tel:050724213319">📞 0507-1438-3340</a>
       <div><small>경기 파주시 천정구로 163-6</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20천정구로%20163-6" target="_blank" rel="noopener">네이버지도 보기</a></div>
     </div>
@@ -227,32 +227,37 @@ const faqData = {
   ],
   lift: [
     { q:"리프트가 고장났어요", a:"리프트옆쪽에 특장업체 전화번호 확인후 AS신청" }
-  ],
+    ],
   tire: [
     { q:"타이어가 마모되서 교체해야 해요", a:"타이어 메뉴에서 매장검색 가까운 매장 방문 교체" },
-    { q:"타이어 옆이 터졌어요", a:"오래되서 터진것이 아닌것은 보험접수계 담당자에게 전화하삼" }
+    { q:"타이어 옆이 터졌어요", a:"오래되서 터진것이 아닌것은 애니카에서 승인을 안해줍니다(다행히 승인해주면 그냥 교체하심됨) 보험접수+발생보고+온나라공문 후 타이어 교체" }
   ],
   microphone: [
     { q:"주먹마이크가 고장났어요", a:"주먹마이크 여분 확인 교체 또는 새로 구매후 교체" }
   ],
-  wash: [ /* 빈배열 — 세차 항목은 필요 시 추가하세요 */ ],
-  etc: [ /* 빈배열 — 기타 질문 추가 가능 */ ]
+  wash: [
+    { q:"차내부가 지져분해서 세차를 하고 싶어요", a:"현재 세차비는 따로 배정되지 않고 있습니다. 수리비에서 지급중인데요 세차가 필요하시면 세차요청서 하나 보내주시고 카드 받아가서 세차하시고 카드+영수증 반납하시면 됩니다." }
+  ],
+  etc: [
+    { q:"IDS가 안나와요", a:"IDS는 범예에 일단 문의 하셔야 합니다." }
+    { q:"무전기가 안돼요", a:"무전기는 정장계 무선담당에게 문의하시면 됩니다." }
+       ]
 };
 
 const anicareStores = [
-  { id:'anicare1', name:'애니카랜드 금촌점', phoneDisplay:'031-5390-3562', phoneTel:'03153903562' },
+  { id:'anicare1', name:'애니카랜드 금촌점', phoneDisplay:'031-943-1171', phoneTel:'0319431171' },
   { id:'anicare2', name:'애니카랜드 교하운정점', phoneDisplay:'031-946-8300', phoneTel:'0319468300' },
-  { id:'anicare3', name:'애니카랜드 탄현점', phoneDisplay:'031-3319-1821', phoneTel:'03133191821' },
-  { id:'anicare4', name:'애니카랜드 조리점', phoneDisplay:'031-6528-5353', phoneTel:'03165285353' },
+  { id:'anicare3', name:'애니카랜드 탄현점', phoneDisplay:'031-942-1821', phoneTel:'0319421821' },
+  { id:'anicare4', name:'애니카랜드 조리점', phoneDisplay:'031-965-5353', phoneTel:'0319655353' },
   { id:'anicare5', name:'애니카랜드 교하점', phoneDisplay:'031-957-2266', phoneTel:'0319572266' },
   { id:'anicare6', name:'애니카랜드 문산점', phoneDisplay:'031-954-0951', phoneTel:'0319540951' },
-  { id:'anicare7', name:'애니카랜드 법원점', phoneDisplay:'031-959-9469', phoneTel:'0319599469' }
+  { id:'anicare7', name:'애니카랜드 법원점', phoneDisplay:'031-958-5711', phoneTel:'0319585711' }
 ];
 
 const tireStores = [
-  { id:'tire1', name:'더타이어샵 봉일천점', phoneDisplay:'0507-8877-2848', phoneTel:'050788772848' },
-  { id:'tire2', name:'티스테이션 출판단지점', phoneDisplay:'0507-4132-4321', phoneTel:'050741324321' },
-  { id:'tire3', name:'한국타이어 파주교하점', phoneDisplay:'0507-2421-3319', phoneTel:'050724213319' }
+  { id:'tire1', name:'더타이어샵 봉일천점', phoneDisplay:'0507-1385-2849', phoneTel:'050713852849' },
+  { id:'tire2', name:'티스테이션 출판단지점', phoneDisplay:'0507-1477-1335', phoneTel:'050714771335' },
+  { id:'tire3', name:'한국타이어 파주교하점', phoneDisplay:'0507-1438-3340', phoneTel:'050714383340' }
 ];
 
 const holidaySchedule = {
@@ -429,3 +434,4 @@ window.faqData = faqData;
 </script>
 </body>
 </html>
+
