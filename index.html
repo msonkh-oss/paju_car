@@ -59,9 +59,10 @@
   }
   .qa-top{
     display:flex;
-    flex-direction:column;     /* 한 화면에 보이도록 세로 정렬 */
+    flex-wrap: wrap;        /* 🔹 줄바꿈 허용 */
     gap:8px;
     overflow:auto;
+    justify-content: center; /* 🔹 가운데 정렬 */
     max-height:60vh;          /* 필요시 스크롤 (모바일/긴 목록 안전) */
     padding-right:6px;
   }
@@ -529,4 +530,5 @@ window.faqData = faqData;
 </script>
 </body>
 </html>
+
 
