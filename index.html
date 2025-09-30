@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -22,7 +23,7 @@
   /* MAIN MENU: vertical, slightly narrower width for prettier layout */
   .main-menu{ display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:8px; }
   .main-btn{
-    width:86%; max-width:560px; padding:14px 16px; border-radius:12px; border:0;
+    width:60%; max-width:560px; padding:14px 16px; border-radius:12px; border:0;
     background:linear-gradient(180deg,var(--pastel-blue),#9fb7bf);
     color:#083b3b; font-weight:800; font-size:1.02rem; cursor:pointer;
     box-shadow:0 8px 18px rgba(12,35,80,0.06); touch-action:manipulation;
@@ -98,7 +99,7 @@
 
   @media(max-width:640px){
     .main-btn{ width:92%; font-size:1rem; padding:13px 14px; }
-    .store-grid{ grid-template-columns: repeat(1,1fr); }
+    .store-grid{ grid-template-columns: repeat(2,1fr); }
     .qa-tab{ min-width:96px; padding:9px 10px; }
     .calendar{ grid-template-columns: repeat(4,1fr); }
   }
@@ -155,6 +156,8 @@
       <button class="store-btn" data-storeid="anicare5">애니카랜드 교하점</button>
       <button class="store-btn" data-storeid="anicare6">애니카랜드 문산점</button>
       <button class="store-btn" data-storeid="anicare7">애니카랜드 법원점</button>
+      <button class="store-btn" data-storeid="anicare8">하나모터스</button>
+       <button class="store-btn" data-storeid="anicare9">(주)파주자동차정비검사소</button>
     </div>
 
     <!-- details: 전화번호/주소 (tel:에는 숫자만), 네이버 링크로 트래픽 최소화 -->
@@ -193,6 +196,16 @@
       <div><small>경기 파주시 법원읍 법원리 422-70</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20법원읍%20법원리%20422-70" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
+    <div id="anicare8" class="store-detail">
+      <a class="phone-link" href="tel:0319486936">📞 031-948-6936</a>
+      <div><small>경기 파주시 동패동 591-5</small>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20동패동%20591-5" target="_blank" rel="noopener">네이버지도</a></div>
+    </div>
+    <div id="anicare9" class="store-detail">
+      <a class="phone-link" href="tel:0319493115">📞 031-949-3115</a>
+      <div><small>경기 파주시 천정구로 163-15</small>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20천정구로%20163-15" target="_blank" rel="noopener">네이버지도</a></div>
+    </div>
 
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
@@ -223,6 +236,7 @@
       <div><small>경기 파주시 천정구로 163-6</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20천정구로%20163-6" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
+  
 
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
@@ -306,6 +320,9 @@ const anicareStores = [
   { id:'anicare5', name:'애니카랜드 교하점', phoneDisplay:'031-957-2266', phoneTel:'0319572266' },
   { id:'anicare6', name:'애니카랜드 문산점', phoneDisplay:'031-954-0951', phoneTel:'0319540951' },
   { id:'anicare7', name:'애니카랜드 법원점', phoneDisplay:'031-958-5711', phoneTel:'0319585711' }
+ { id:'anicare8', name:'하나모터스', phoneDisplay:'031-948-6936', phoneTel:'0319486936' }
+ { id:'anicare9', name:'(주)파주자동차정비검사소', phoneDisplay:'031-949-3115', phoneTel:'0319493115' }
+
 ];
 
 const tireStores = [
@@ -315,13 +332,13 @@ const tireStores = [
 ];
 
 const holidaySchedule = {
-  '3': { anicare: ['anicare1','anicare2','anicare3'], tire: ['tire1','tire2'] },
-  '4': { anicare: ['anicare4'], tire: ['tire1','tire2','tire3'] },
-  '5': { anicare: ['anicare2'], tire: ['tire1','tire2'] },
-  '6': { anicare: [], tire: [] },
-  '7': { anicare: ['anicare3'], tire: ['tire2'] },
-  '8': { anicare: ['anicare4'], tire: ['tire1','tire2'] },
-  '9': { anicare: ['anicare1'], tire: ['tire1','tire2','tire3'] }
+  '3': { anicare: ['anicare5','anicare7'], tire: ['tire1','tire2', 'tire3'] },
+  '4': { anicare: ['anicare3', 'anicare4', 'anicare5', 'anicare7'], tire: ['tire1','tire2','tire3'] },
+  '5': { anicare: ['anicare7', 'anicare8'], tire: [] },
+  '6': { anicare: ['anicare8'], tire: [] },
+  '7': { anicare: ['anicare7', 'anicare8'], tire: [] },
+  '8': { anicare: ['anicare3', 'anicare7', 'anicare8'], tire: [] },
+  '9': { anicare: ['anicare7', 'anicare8'], tire: ['tire1','tire2','tire3'] }
 };
 
 /* ===========================
