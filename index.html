@@ -69,6 +69,7 @@
   .qa-top::-webkit-scrollbar{ width:6px; }
   .qa-tab{
     display:block;
+    flex: 0 1 45%; /* 🔹 최대 45% 너비로 줄임 */
     width:100%;
     padding:10px 12px;
     border-radius:10px;
@@ -76,7 +77,7 @@
     border:0;
     font-weight:800;
     cursor:pointer;
-    text-align:left;
+    text-align:center;
   }
   .qa-tab.active{ background:var(--select); color:#111 }
   .qa-list{ margin-top:0 } /* 오른쪽 콘텐츠는 qa-panel 내부에 있으므로 상단여백 제거 */
@@ -530,5 +531,6 @@ window.faqData = faqData;
 </script>
 </body>
 </html>
+
 
 
