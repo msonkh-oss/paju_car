@@ -7,111 +7,80 @@
 <style>
   :root{
     --bg1:#fbf6ef; --bg2:#fffdf9;
-    --navy:#113a7a; --muted:#6b7280; --call:#10b981;
-    --holiday:#e63946; --select:#facc15;
+    --pastel-blue:#AEC6CF; --pastel-green:#B5EAD7; --pastel-pink:#FFB7B2;
+    --pastel-yellow:#FFFACD; --pastel-purple:#D4B4FF;
+    --muted:#6b7280; --call:#10b981; --holiday:#e63946; --select:#facc15;
+    --text:#111;
   }
-  html,body{height:100%;margin:0;padding:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-  body{background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#111;-webkit-text-size-adjust:100%}
-  .wrap{max-width:920px;margin:16px auto;padding:12px}
-  header{background:#fff;padding:12px;border-radius:10px;text-align:center;font-weight:800;color:var(--navy);box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+  html,body{height:100%;margin:0;padding:0;font-family: system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--text);-webkit-text-size-adjust:100%}
+  body{background: linear-gradient(135deg,var(--bg1),var(--bg2));}
+
+  .wrap{max-width:920px;margin:14px auto;padding:12px;}
+  header{background:#fff;padding:12px;border-radius:10px;text-align:center;font-weight:800;color:#274056;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
   #banner{margin:12px 0;padding:10px;border-radius:10px;background:#fff7e8;border:1px solid #f1dcc2;font-weight:700;text-align:center}
 
-  /* ===== MAIN MENU: vertical + large touch targets ===== */
-  .main-grid{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:14px;
-    margin-top:10px;
+  /* MAIN MENU: vertical, slightly narrower width for prettier layout */
+  .main-menu{ display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:8px; }
+  .main-btn{
+    width:86%; max-width:560px; padding:14px 16px; border-radius:12px; border:0;
+    background:linear-gradient(180deg,var(--pastel-blue),#9fb7bf);
+    color:#083b3b; font-weight:800; font-size:1.02rem; cursor:pointer;
+    box-shadow:0 8px 18px rgba(12,35,80,0.06); touch-action:manipulation;
   }
-  .btn-main{
-    width:94%;
-    max-width:760px;
-    padding:18px 22px;
-    border-radius:14px;
-    border:0;
-    background:linear-gradient(180deg,var(--navy),#0b2a4a);
-    color:#fff;
-    font-weight:900;
-    font-size:1.06rem;
-    cursor:pointer;
-    box-shadow:0 10px 22px rgba(12,35,80,0.12);
-    touch-action: manipulation;
-  }
-  .btn-main:active{ transform: translateY(1px); }
-  .btn-calendar{ background:var(--holiday) !important; color:#fff }
+  .main-btn.alt{ background: linear-gradient(180deg,var(--pastel-green),#aee6cf); color:#133b2f; }
+  .main-btn.pink{ background: linear-gradient(180deg,var(--pastel-pink),#ff9f9a); color:#3b0a0a; }
+  .main-btn:active{ transform: translateY(1px); }
 
-  /* hidden sections */
+  /* sections */
   section.hidden{ display:none; margin-top:12px; }
+  section{ margin-top:12px; }
 
-  /* stores */
-  .store-grid{
-    display:grid;
-    gap:12px;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    align-items:start;
-  }
+  /* store grid */
+  .store-grid{ display:grid; gap:10px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); align-items:start; margin-top:8px; }
   .store-btn{
-    padding:14px;
-    border-radius:12px;
-    border:0;
-    background:#164a85;
-    color:#fff;
-    font-weight:800;
-    cursor:pointer;
-    text-align:center;
-    box-shadow:0 8px 20px rgba(10,30,60,0.12);
-    font-size:1rem;
-    touch-action: manipulation;
+    padding:12px; border-radius:10px; border:0; background:linear-gradient(180deg,var(--pastel-purple),#cdb7ff); color:#21103b; font-weight:800; font-size:0.98rem; cursor:pointer;
+    box-shadow:0 6px 16px rgba(0,0,0,0.06); touch-action:manipulation;
   }
-  .store-btn:hover{ transform: translateY(-2px); }
-  .store-btn.selected{ background:var(--select); color:#000 }
+  .store-btn:hover{ transform: translateY(-3px); }
+  .store-btn.selected{ background:var(--select); color:#111; }
 
-  .store-detail{ display:none; margin-top:12px; padding:14px; background:#fff; border-radius:12px; box-shadow:0 10px 28px rgba(0,0,0,0.06); text-align:left; }
-  .phone-link{ display:inline-block; padding:10px 14px; border-radius:10px; background:var(--call); color:#fff; font-weight:800; text-decoration:none; }
-  .map-link{ display:inline-block; margin-left:8px; padding:8px 10px; border-radius:8px; border:1px solid #ddd; background:#fff; color:var(--navy); text-decoration:none; font-weight:700; }
-  .back-btn{ margin-top:12px; padding:12px 16px; border-radius:12px; background:var(--muted); color:#fff; border:0; cursor:pointer; font-weight:800; }
+  .store-detail{ display:none; margin-top:12px; padding:12px; background:#fff; border-radius:10px; box-shadow:0 8px 22px rgba(0,0,0,0.06); text-align:left; }
+  .phone-link{ display:inline-block; padding:8px 12px; border-radius:8px; background:var(--call); color:#fff; text-decoration:none; font-weight:800; }
+  .map-link{ display:inline-block; margin-left:8px; padding:8px 10px; border-radius:8px; border:1px solid #ddd; background:#fff; color:#274056; text-decoration:none; font-weight:700 }
+
+  .back-btn{ margin-top:12px; padding:10px 14px; border-radius:10px; background:var(--muted); color:#fff; border:0; cursor:pointer; font-weight:800 }
 
   /* Q&A */
-  .qa-area{ margin-top:12px; text-align:left; }
-  .qa-cat-bar{ display:flex; gap:10px; flex-wrap:nowrap; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch; }
-  .qa-cat-bar::-webkit-scrollbar{ display:none; }
-  .qa-cat-btn{
-    padding:10px 14px; border-radius:10px; border:0; background:#fff7e8; cursor:pointer; font-weight:800; min-width:120px; text-align:center; font-size:0.95rem;
-    touch-action: manipulation;
-  }
-  .qa-cat-btn.active{ background:var(--select); color:#000; }
-  .qa-list{ padding:8px; }
-  .qa-item{ padding:10px; border-radius:10px; background:#fff; margin-bottom:10px; box-shadow:0 3px 8px rgba(0,0,0,0.03); }
-  .qa-q{ font-weight:800; cursor:pointer; }
-  .qa-a{ display:none; margin-top:6px; color:#333; }
+  .qa-top{ display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; -webkit-overflow-scrolling:touch; }
+  .qa-top::-webkit-scrollbar{ height:0; }
+  .qa-tab{ flex:0 0 auto; padding:10px 12px; border-radius:10px; background:#fff7e8; border:0; font-weight:800; cursor:pointer; min-width:120px; text-align:center }
+  .qa-tab.active{ background:var(--select); color:#111 }
+  .qa-list{ margin-top:10px }
+  .qa-item{ padding:12px; border-radius:10px; background:#fff; margin-bottom:10px; box-shadow:0 4px 12px rgba(0,0,0,0.04) }
+  .qa-q{ font-weight:800; cursor:pointer }
+  .qa-a{ display:none; margin-top:8px; color:#333 }
 
   /* calendar */
-  .calendar{ display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin-top:12px; }
-  .calendar .day{ background:var(--holiday); color:#fff; padding:14px; border-radius:10px; font-weight:800; text-align:center; border:0; cursor:pointer; font-size:0.95rem; touch-action: manipulation; }
-  .calendar .day.selected{ background:var(--select); color:#000; }
+  .calendar{ display:grid; grid-template-columns: repeat(7,1fr); gap:8px; margin-top:8px; }
+  .calendar .day{ background:var(--holiday); color:#fff; padding:12px; border-radius:8px; font-weight:800; cursor:pointer; border:0; }
+  .calendar .day.selected{ background:var(--select); color:#111; }
 
-  /* responsive tweaks */
   @media(max-width:640px){
-    .btn-main{ font-size:1.02rem; padding:16px 18px; }
+    .main-btn{ width:92%; font-size:1rem; padding:13px 14px; }
     .store-grid{ grid-template-columns: repeat(1,1fr); }
-    .qa-cat-btn{ min-width:100px; padding:10px 12px; font-size:0.92rem; }
+    .qa-tab{ min-width:96px; padding:9px 10px; }
     .calendar{ grid-template-columns: repeat(4,1fr); }
-  }
-  @media(min-width:900px){
-    .btn-main{ max-width:660px; }
-    .store-grid{ grid-template-columns: repeat(3,1fr); }
   }
 </style>
 </head>
 <body>
 <script>
-  // QR 토큰 체크 (문서 최상단에서 빠르게 차단)
+  // QR 토큰 체크 (최상단에서 빠르게 차단)
   (function(){
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
-    const allowed = 'abcd1234';
-    if(token !== allowed){
+    const ALLOWED = 'abcd1234';
+    if(token !== ALLOWED){
       document.documentElement.innerHTML = '<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>접근불가</title></head><body style="font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;"><div style="text-align:center;"><h2>접근 불가</h2><p>QR 코드로만 접속 가능합니다.</p></div></body>';
       throw new Error('Access denied - invalid token');
     }
@@ -120,16 +89,18 @@
 
 <div class="wrap">
   <header>🚓 파주서 차량관리</header>
+
+  <!-- editable banner -->
   <div id="banner">[9월] 월간점검현황 : 점검율 [79]% , 정비율 [68]%</div>
 
   <!-- MAIN MENU -->
-  <div id="mainMenu" class="main-grid" style="display:flex;">
-    <button class="btn-main" onclick="openMenu('accident')">📞 사고접수</button>
-    <button class="btn-main" onclick="openMenu('anicare')">🏪 애니카랜드</button>
-    <button class="btn-main" onclick="openMenu('tire')">🛞 타이어</button>
-    <button class="btn-main" onclick="openMenu('repair')">🔧 특장수리</button>
-    <button class="btn-main" onclick="openMenu('qa')">❓ Q&A</button>
-    <button class="btn-main btn-calendar" onclick="openMenu('chuseok')">📅 25추석(애니카)</button>
+  <div class="main-menu" id="mainMenu">
+    <button class="main-btn" data-target="accident">📞 사고접수</button>
+    <button class="main-btn" data-target="anicare">🏪 애니카랜드</button>
+    <button class="main-btn alt" data-target="tire">🛞 타이어</button>
+    <button class="main-btn pink" data-target="repair">🔧 특장수리</button>
+    <button class="main-btn" data-target="qa">❓ Q&A</button>
+    <button class="main-btn" data-target="chuseok">📅 25추석(애니카)</button>
   </div>
 
   <!-- ACCIDENT -->
@@ -146,49 +117,50 @@
   <section id="anicare" class="hidden">
     <div style="font-weight:800;margin-bottom:8px">🏪 애니카랜드</div>
     <div class="store-grid" id="anicareGrid">
-      <button class="store-btn" data-storeid="anicare1" onclick="toggleStore('anicare1', this)">금촌점</button>
-      <button class="store-btn" data-storeid="anicare2" onclick="toggleStore('anicare2', this)">교하운정점</button>
-      <button class="store-btn" data-storeid="anicare3" onclick="toggleStore('anicare3', this)">탄현점</button>
-      <button class="store-btn" data-storeid="anicare4" onclick="toggleStore('anicare4', this)">조리점</button>
-      <button class="store-btn" data-storeid="anicare5" onclick="toggleStore('anicare5', this)">교하점</button>
-      <button class="store-btn" data-storeid="anicare6" onclick="toggleStore('anicare6', this)">문산점</button>
-      <button class="store-btn" data-storeid="anicare7" onclick="toggleStore('anicare7', this)">법원점</button>
+      <button class="store-btn" data-storeid="anicare1">애니카랜드 금촌점</button>
+      <button class="store-btn" data-storeid="anicare2">애니카랜드 교하운정점</button>
+      <button class="store-btn" data-storeid="anicare3">애니카랜드 탄현점</button>
+      <button class="store-btn" data-storeid="anicare4">애니카랜드 조리점</button>
+      <button class="store-btn" data-storeid="anicare5">애니카랜드 교하점</button>
+      <button class="store-btn" data-storeid="anicare6">애니카랜드 문산점</button>
+      <button class="store-btn" data-storeid="anicare7">애니카랜드 법원점</button>
     </div>
 
+    <!-- details: 전화번호/주소 (tel:에는 숫자만), 네이버 링크로 트래픽 최소화 -->
     <div id="anicare1" class="store-detail">
       <a class="phone-link" href="tel:03153903562">📞 031-943-1171</a>
       <div><small>경기 파주시 금촌동 420-1</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20금촌동%20420-1" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20금촌동%20420-1" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
     <div id="anicare2" class="store-detail">
       <a class="phone-link" href="tel:0319468300">📞 031-946-8300</a>
       <div><small>경기 파주시 운정역길 293</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20운정역길%20293" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20운정역길%20293" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
     <div id="anicare3" class="store-detail">
       <a class="phone-link" href="tel:03133191821">📞 031-942-1821</a>
       <div><small>경기 파주시 탄현면 축현리 253-3</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20탄현면%20축현리%20253-3" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20탄현면%20축현리%20253-3" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
     <div id="anicare4" class="store-detail">
       <a class="phone-link" href="tel:03165285353">📞 031-965-5353</a>
       <div><small>경기 파주시 조리읍 장곡리 529-1</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20장곡리%20529-1" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20장곡리%20529-1" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
     <div id="anicare5" class="store-detail">
       <a class="phone-link" href="tel:0319572266">📞 031-957-2266</a>
       <div><small>경기 파주시 문발동 44-9</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20문발동%2044-9" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20문발동%2044-9" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
     <div id="anicare6" class="store-detail">
       <a class="phone-link" href="tel:0319540951">📞 031-954-0951</a>
       <div><small>경기 파주시 문산읍 선유리 767-3</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20문산읍%20선유리%20767-3" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20문산읍%20선유리%20767-3" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
     <div id="anicare7" class="store-detail">
       <a class="phone-link" href="tel:0319599469">📞 031-958-5711</a>
       <div><small>경기 파주시 법원읍 법원리 422-70</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20법원읍%20법원리%20422-70" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20법원읍%20법원리%20422-70" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
 
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
@@ -198,27 +170,27 @@
   <section id="tire" class="hidden">
     <div style="font-weight:800;margin-bottom:8px">🛞 타이어</div>
     <div class="store-grid" id="tireGrid">
-      <button class="store-btn" data-storeid="tire1" onclick="toggleStore('tire1', this)">더타이어샵 봉일천점</button>
-      <button class="store-btn" data-storeid="tire2" onclick="toggleStore('tire2', this)">티스테이션 출판단지점</button>
-      <button class="store-btn" data-storeid="tire3" onclick="toggleStore('tire3', this)">한국타이어 파주교하점</button>
+      <button class="store-btn" data-storeid="tire1">더타이어샵 봉일천점</button>
+      <button class="store-btn" data-storeid="tire2">티스테이션 출판단지점</button>
+      <button class="store-btn" data-storeid="tire3">한국타이어 파주교하점</button>
     </div>
 
     <div id="tire1" class="store-detail">
       <a class="phone-link" href="tel:050788772848">📞 0507-1385-2849</a>
       <div><small>경기 파주시 조리읍 통일로 477-10</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20통일로%20477-10" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20조리읍%20통일로%20477-10" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
 
     <div id="tire2" class="store-detail">
       <a class="phone-link" href="tel:050741324321">📞 0507-1477-1335</a>
       <div><small>경기 파주시 산남로 98</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20산남로%2098" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20산남로%2098" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
 
     <div id="tire3" class="store-detail">
       <a class="phone-link" href="tel:050724213319">📞 0507-1438-3340</a>
       <div><small>경기 파주시 천정구로 163-6</small>
-      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20천정구로%20163-6" target="_blank" rel="noopener">네이버지도 보기</a></div>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20천정구로%20163-6" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
 
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
@@ -234,33 +206,34 @@
   <!-- Q&A -->
   <section id="qa" class="hidden">
     <div style="font-weight:800;margin-bottom:8px">❓ Q&A</div>
-    <div class="qa-area">
-      <div class="qa-cat-bar" id="qaCatBar"></div>
-      <div id="qaList" class="qa-list"></div>
-    </div>
+    <div class="qa-top" id="qaCatBar" aria-hidden="false"></div>
+    <div id="qaList" class="qa-list"></div>
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
   <!-- CHUSEOK -->
   <section id="chuseok" class="hidden">
     <div style="font-weight:800;margin-bottom:8px">🍂 25년 추석연휴 (2025-10-03 ~ 2025-10-09)</div>
-    <div class="calendar" role="list" aria-label="추석 달력">
-      <button class="day" data-day="3" onclick="selectDay(this)">10/3</button>
-      <button class="day" data-day="4" onclick="selectDay(this)">10/4</button>
-      <button class="day" data-day="5" onclick="selectDay(this)">10/5</button>
-      <button class="day" data-day="6" onclick="selectDay(this)">10/6</button>
-      <button class="day" data-day="7" onclick="selectDay(this)">10/7</button>
-      <button class="day" data-day="8" onclick="selectDay(this)">10/8</button>
-      <button class="day" data-day="9" onclick="selectDay(this)">10/9</button>
+    <div class="calendar" id="chuseokCalendar" role="list" aria-label="추석 달력">
+      <button class="day" data-day="3">10/3</button>
+      <button class="day" data-day="4">10/4</button>
+      <button class="day" data-day="5">10/5</button>
+      <button class="day" data-day="6">10/6</button>
+      <button class="day" data-day="7">10/7</button>
+      <button class="day" data-day="8">10/8</button>
+      <button class="day" data-day="9">10/9</button>
     </div>
-    <div id="chuseokStoreGrid" class="store-grid" style="margin-top:14px"></div>
+
+    <div id="chuseokStoreGrid" class="store-grid" style="margin-top:12px"></div>
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
 </div> <!-- wrap -->
 
 <script>
-/* ========== 데이터 (원본 텍스트 그대로 유지) ========== */
+/* ===========================
+   원본 데이터 — 그대로 유지 (전화번호/Q&A/스케줄 등)
+   =========================== */
 const faqData = {
   blackbox: [
     { q:"블랙박스가 고장났어요", a:"순찰차량은 특장업체에 전화, 일반차량은 블박업체 AS신청" },
@@ -286,7 +259,7 @@ const faqData = {
 };
 
 const anicareStores = [
-  { id:'anicare1', name:'애니카랜드 금촌점', phoneDisplay:'031-943-1171', phoneTel:'0319431171' },
+ { id:'anicare1', name:'애니카랜드 금촌점', phoneDisplay:'031-943-1171', phoneTel:'0319431171' },
   { id:'anicare2', name:'애니카랜드 교하운정점', phoneDisplay:'031-946-8300', phoneTel:'0319468300' },
   { id:'anicare3', name:'애니카랜드 탄현점', phoneDisplay:'031-942-1821', phoneTel:'0319421821' },
   { id:'anicare4', name:'애니카랜드 조리점', phoneDisplay:'031-965-5353', phoneTel:'0319655353' },
@@ -296,113 +269,142 @@ const anicareStores = [
 ];
 
 const tireStores = [
-  { id:'tire1', name:'더타이어샵 봉일천점', phoneDisplay:'0507-1385-2849', phoneTel:'050713852849' },
+{ id:'tire1', name:'더타이어샵 봉일천점', phoneDisplay:'0507-1385-2849', phoneTel:'050713852849' },
   { id:'tire2', name:'티스테이션 출판단지점', phoneDisplay:'0507-1477-1335', phoneTel:'050714771335' },
   { id:'tire3', name:'한국타이어 파주교하점', phoneDisplay:'0507-1438-3340', phoneTel:'050714383340' }
 ];
 
 const holidaySchedule = {
-  '3': { anicare: ['anicare1', 'anicare2', 'anicare3'], tire: ['tire1', 'tire2' ] },
-  '4': { anicare: ['anicare4'], tire: ['tire1', 'tire2', 'tire3'] },
-  '5': { anicare: ['anicare2'], tire: ['tire1', 'tire2'] },
+  '3': { anicare: ['anicare1','anicare2','anicare3'], tire: ['tire1','tire2'] },
+  '4': { anicare: ['anicare4'], tire: ['tire1','tire2','tire3'] },
+  '5': { anicare: ['anicare2'], tire: ['tire1','tire2'] },
   '6': { anicare: ['anicare3'], tire: [] },
   '7': { anicare: ['anicare3'], tire: ['tire2'] },
-  '8': { anicare: ['anicare4'], tire: ['tire1', 'tire2'] },
-  '9': { anicare: ['anicare1'], tire: ['tire1', 'tire2', 'tire3'] }
+  '8': { anicare: ['anicare4'], tire: ['tire1','tire2'] },
+  '9': { anicare: ['anicare1'], tire: ['tire1','tire2','tire3'] }
 };
 
-/* ========== UI 로직 (기능 변경 없음) ========== */
+/* ===========================
+   렌더/유틸 (DOM ready 후 초기화)
+   =========================== */
+
 function openMenu(id){
-  document.getElementById('mainMenu').style.display='none';
-  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+  // hide main menu and all sections, show requested section
+  document.getElementById('mainMenu').style.display = 'none';
+  document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
   const el = document.getElementById(id);
   if(el) el.classList.remove('hidden');
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top:0, behavior:'smooth' });
 }
+
 function backToMain(){
-  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
-  document.getElementById('mainMenu').style.display='flex';
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+  document.getElementById('mainMenu').style.display = 'flex';
+  // clear highlights
+  document.querySelectorAll('.store-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.calendar .day').forEach(d => d.classList.remove('selected'));
+  window.scrollTo({ top:0, behavior:'smooth' });
 }
 
 function toggleStore(id, btnElem){
-  document.querySelectorAll('.store-detail').forEach(d=>{
+  // show/hide details
+  document.querySelectorAll('.store-detail').forEach(d => {
     d.style.display = (d.id === id && d.style.display !== 'block') ? 'block' : 'none';
     if(d.style.display==='block') d.scrollIntoView({behavior:'smooth', block:'center'});
   });
-  document.querySelectorAll('.store-btn').forEach(b=> b.classList.remove('selected'));
-  document.querySelectorAll('[data-storeid="'+id+'"]').forEach(b=> b.classList.add('selected'));
+  // highlight buttons for same storeid (both static and dynamic)
+  document.querySelectorAll('.store-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('[data-storeid="'+id+'"]').forEach(b => b.classList.add('selected'));
   if(btnElem) btnElem.classList.add('selected');
 }
 
-function pickRandom(arr,n){
-  const c=arr.slice(), out=[];
-  while(out.length<n && c.length){
-    const i=Math.floor(Math.random()*c.length);
-    out.push(c.splice(i,1)[0]);
+function pickRandom(arr, n){
+  const copy = arr.slice(), out = [];
+  while(out.length < n && copy.length){
+    const i = Math.floor(Math.random()*copy.length);
+    out.push(copy.splice(i,1)[0]);
   }
   return out;
 }
 
 function showChuseokStores(day){
-  const grid = document.getElementById('chuseokStoreGrid'); grid.innerHTML='';
+  const grid = document.getElementById('chuseokStoreGrid');
+  grid.innerHTML = '';
   const sched = holidaySchedule[day];
   let anicareToShow = [], tireToShow = [];
   if(sched && ((sched.anicare && sched.anicare.length) || (sched.tire && sched.tire.length))){
-    if(sched.anicare) anicareToShow = sched.anicare.map(id=> anicareStores.find(s=>s.id===id)).filter(Boolean);
-    if(sched.tire) tireToShow = sched.tire.map(id=> tireStores.find(s=>s.id===id)).filter(Boolean);
+    if(sched.anicare) anicareToShow = sched.anicare.map(id => anicareStores.find(s => s.id === id)).filter(Boolean);
+    if(sched.tire) tireToShow = sched.tire.map(id => tireStores.find(s => s.id === id)).filter(Boolean);
   } else {
     anicareToShow = pickRandom(anicareStores, Math.min(3, anicareStores.length));
     tireToShow = pickRandom(tireStores, Math.min(3, tireStores.length));
   }
 
-  const header = document.createElement('div'); header.style.gridColumn='1/-1'; header.style.fontWeight='700'; header.style.textAlign='left'; header.style.padding='6px 0';
+  const header = document.createElement('div');
+  header.style.gridColumn = '1/-1';
+  header.style.fontWeight = '700';
+  header.style.textAlign = 'left';
+  header.style.padding = '6px 0';
   header.textContent = `10/${day} 영업 매장 — 애니카 ${anicareToShow.length}곳 · 타이어 ${tireToShow.length}곳`;
   grid.appendChild(header);
 
-  anicareToShow.forEach(s=>{
-    const btn = document.createElement('button'); btn.className='store-btn'; btn.setAttribute('data-storeid', s.id);
+  anicareToShow.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'store-btn';
+    btn.setAttribute('data-storeid', s.id);
     btn.textContent = `애니카 • ${s.name} (${s.phoneDisplay})`;
     btn.onclick = function(){
-      document.querySelectorAll('.store-btn').forEach(b=> b.classList.remove('selected'));
+      // highlight
+      document.querySelectorAll('.store-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
+      // open anicare section and toggle detail (try to find static button to pass as btnElem)
       openMenu('anicare');
-      setTimeout(()=> toggleStore(s.id), 160);
+      setTimeout(()=> {
+        const staticBtn = document.querySelector('[data-storeid="'+s.id+'"]');
+        toggleStore(s.id, staticBtn || btn);
+      }, 160);
     };
     grid.appendChild(btn);
   });
 
-  tireToShow.forEach(s=>{
-    const btn = document.createElement('button'); btn.className='store-btn'; btn.setAttribute('data-storeid', s.id);
+  tireToShow.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'store-btn';
+    btn.setAttribute('data-storeid', s.id);
     btn.textContent = `타이어 • ${s.name} (${s.phoneDisplay})`;
     btn.onclick = function(){
-      document.querySelectorAll('.store-btn').forEach(b=> b.classList.remove('selected'));
+      document.querySelectorAll('.store-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       openMenu('tire');
-      setTimeout(()=> toggleStore(s.id), 160);
+      setTimeout(()=> {
+        const staticBtn = document.querySelector('[data-storeid="'+s.id+'"]');
+        toggleStore(s.id, staticBtn || btn);
+      }, 160);
     };
     grid.appendChild(btn);
   });
 }
 
-function selectDay(btn){
-  document.querySelectorAll('.calendar .day').forEach(d=> d.classList.remove('selected'));
+/* calendar day selection */
+function selectChuseokDay(btn){
+  document.querySelectorAll('.calendar .day').forEach(d => d.classList.remove('selected'));
   btn.classList.add('selected');
   showChuseokStores(btn.dataset.day);
 }
 
-/* Q&A 렌더 */
+/* Q&A render */
 function renderFAQ(){
   const catBar = document.getElementById('qaCatBar');
   const list = document.getElementById('qaList');
-  catBar.innerHTML=''; list.innerHTML='';
+  catBar.innerHTML = '';
+  list.innerHTML = '';
 
   const categories = {
-    blackbox:'📹 블랙박스',
-    lift:'🛠 특수장비',
-    tire:'🛞 타이어',
-    wash:'🧽 세차',
-    etc:'📌 기타'
+    blackbox: '📹 블랙박스',
+    lift: '🛠 특수장비',
+    tire: '🛞 타이어',
+    wash: '🧽 세차',
+    etc: '📌 기타'
   };
 
   function getItems(key){
@@ -412,41 +414,76 @@ function renderFAQ(){
     return faqData[key] || [];
   }
 
-  Object.keys(categories).forEach((k, idx)=>{
-    const b = document.createElement('button'); b.className='qa-cat-btn'; b.textContent = categories[k];
-    b.onclick = function(){
-      document.querySelectorAll('.qa-cat-btn').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
+  Object.keys(categories).forEach((k, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'qa-tab';
+    btn.textContent = categories[k];
+    btn.onclick = function(){
+      document.querySelectorAll('.qa-tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
       const items = getItems(k);
       list.innerHTML = '';
       if(items.length === 0){
-        const note = document.createElement('div'); note.style.padding='10px'; note.style.color='#666'; note.textContent = '질문이 없습니다. faqData.'+k+' 에 항목을 추가해 주세요.';
+        const note = document.createElement('div'); note.className='qa-item';
+        note.textContent = '질문이 없습니다. faqData.' + k + ' 에 항목을 추가해 주세요.';
         list.appendChild(note);
-      } else {
-        items.forEach(it=>{
-          const item = document.createElement('div'); item.className='qa-item';
-          const q = document.createElement('div'); q.className='qa-q'; q.textContent = 'Q. '+it.q;
-          const a = document.createElement('div'); a.className='qa-a'; a.innerHTML = 'A. '+it.a;
-          q.addEventListener('click', ()=> a.style.display = a.style.display==='block' ? 'none' : 'block');
-          item.appendChild(q); item.appendChild(a); list.appendChild(item);
-        });
+        return;
       }
+      items.forEach(it => {
+        const item = document.createElement('div'); item.className = 'qa-item';
+        const q = document.createElement('div'); q.className = 'qa-q'; q.textContent = 'Q. ' + it.q;
+        const a = document.createElement('div'); a.className = 'qa-a'; a.innerHTML = 'A. ' + it.a;
+        q.addEventListener('click', ()=> { a.style.display = (a.style.display === 'block') ? 'none' : 'block'; });
+        item.appendChild(q); item.appendChild(a); list.appendChild(item);
+      });
     };
-    catBar.appendChild(b);
-    if(idx===0) b.click();
+    catBar.appendChild(btn);
+    if(idx===0) btn.click();
   });
 }
 
 /* init */
-function init(){
-  document.getElementById('mainMenu').style.display='flex';
-  document.querySelectorAll('section').forEach(s=> s.classList.add('hidden'));
-  document.querySelectorAll('.store-detail').forEach(d=> d.style.display='none');
-  renderFAQ();
-}
-window.addEventListener('load', init);
+document.addEventListener('DOMContentLoaded', function(){
+  // main menu click handlers
+  document.querySelectorAll('.main-menu .main-btn').forEach(b => {
+    b.addEventListener('click', ()=> {
+      // remove any main selection visuals
+      document.querySelectorAll('.main-menu .main-btn').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');
+      openMenu(b.dataset.target);
+    });
+  });
 
-/* expose for console editing */
+  // attach handlers to static store buttons (pass element itself)
+  document.querySelectorAll('[data-storeid]').forEach(btn=>{
+    btn.addEventListener('click', function(e){
+      const id = btn.getAttribute('data-storeid');
+      // If a static store button clicked, open its section and show detail
+      // Determine which section it belongs to by id prefix
+      if(id.startsWith('anicare')){
+        openMenu('anicare');
+      } else if(id.startsWith('tire')){
+        openMenu('tire');
+      }
+      setTimeout(()=> toggleStore(id, btn), 140);
+    });
+  });
+
+  // calendar day buttons
+  document.querySelectorAll('#chuseokCalendar .day').forEach(btn=>{
+    btn.addEventListener('click', ()=> selectChuseokDay(btn));
+  });
+
+  // render Q&A content
+  renderFAQ();
+
+  // ensure mainMenu visible on load
+  document.getElementById('mainMenu').style.display = 'flex';
+  document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+  document.querySelectorAll('.store-detail').forEach(d => d.style.display = 'none');
+});
+
+/* expose data for console editing if needed */
 window.anicareStores = anicareStores;
 window.tireStores = tireStores;
 window.holidaySchedule = holidaySchedule;
@@ -454,4 +491,3 @@ window.faqData = faqData;
 </script>
 </body>
 </html>
-
