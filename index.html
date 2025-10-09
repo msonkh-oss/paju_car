@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -60,17 +59,17 @@
   }
   .qa-top{
     display:flex;
-    flex-wrap: wrap;        /* 🔹 줄바꿈 허용 */
+    flex-wrap: wrap;        /* 줄바꿈 허용 */
     gap:8px;
     overflow:auto;
-    justify-content: center; /* 🔹 가운데 정렬 */
-    max-height:60vh;          /* 필요시 스크롤 (모바일/긴 목록 안전) */
+    justify-content: center;
+    max-height:60vh;
     padding-right:6px;
   }
   .qa-top::-webkit-scrollbar{ width:6px; }
   .qa-tab{
     display:block;
-    flex: 0 1 45%; /* 🔹 최대 45% 너비로 줄임 */
+    flex: 0 1 45%;
     width:100%;
     padding:10px 12px;
     border-radius:10px;
@@ -86,6 +85,26 @@
   .qa-q{ font-weight:800; cursor:pointer }
   .qa-a{ display:none; margin-top:8px; color:#333 }
 
+  /* ========== NEW: 특장수리 스타일 (추가된 부분) ========== */
+  .repair-panel{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 12px;
+    align-items: start;
+    margin-top:8px;
+  }
+  .repair-cat{ display:flex; flex-direction:column; gap:8px; }
+  .cat-btn{
+    padding:10px 12px; border-radius:10px; border:0; background:#fff7e8; font-weight:800; cursor:pointer; text-align:left;
+    box-shadow:0 6px 14px rgba(0,0,0,0.04);
+  }
+  .cat-btn.active{ background:var(--select); color:#111; }
+  .cat-btn:hover{ transform: translateY(-2px); }
+  .repair-list{ }
+  .repair-item{ padding:12px; border-radius:10px; background:#fff; margin-bottom:10px; box-shadow:0 4px 12px rgba(0,0,0,0.04) }
+  .repair-item .repair-info{ font-weight:800; }
+  /* ========== END NEW ========== */
+
   /* calendar */
   .calendar{ display:grid; grid-template-columns: repeat(7,1fr); gap:8px; margin-top:8px; }
   .calendar .day{ background:var(--holiday); color:#fff; padding:12px; border-radius:8px; font-weight:800; cursor:pointer; border:0; }
@@ -95,6 +114,11 @@
     .qa-panel{ grid-template-columns: 1fr; } /* 모바일에서 카테고리 위, 목록 아래로 스택 */
     .qa-top{ flex-direction:row; overflow-x:auto; max-height:none; gap:8px; padding:0 6px; }
     .qa-tab{ min-width:120px; white-space:nowrap; text-align:center; }
+
+    /* repair responsive */
+    .repair-panel{ grid-template-columns: 1fr; }
+    .repair-cat{ flex-direction:row; flex-wrap:wrap; gap:8px; }
+    .cat-btn{ flex:0 1 48%; }
   }
 
   @media(max-width:640px){
@@ -106,7 +130,7 @@
 </style>
 </head>
 <body>
-<script>
+ <script>
   // QR 토큰 체크 (최상단에서 빠르게 차단)
   (function(){
     const params = new URLSearchParams(window.location.search);
@@ -123,16 +147,17 @@
   <header>🚓 파주서 차량관리</header>
 
   <!-- editable banner -->
-  <div id="banner">[9월] 월간점검현황 : 정비율 [86]% , 점검율 [79]%</div>
+  <div id="banner">[10월] 월간점검현황 : 정비율 [5]% , 점검율 [5]%</div>
 
   <!-- MAIN MENU -->
   <div class="main-menu" id="mainMenu">
     <button class="main-btn" data-target="accident">📞 사고접수</button>
     <button class="main-btn" data-target="anicare">🏪 애니카랜드</button>
     <button class="main-btn alt" data-target="tire">🛞 타이어</button>
+    <!-- 기존 버튼 유지: repair은 아래 섹션을 새 UI로 교체했습니다 -->
     <button class="main-btn pink" data-target="repair">🔧 특장수리</button>
     <button class="main-btn" data-target="qa">❓ Q&A</button>
-    <button class="main-btn" data-target="chuseok">📅 25추석(애니카)</button>
+    <!-- <button class="main-btn" data-target="chuseok">📅 25추석(애니카)</button> -->
   </div>
 
   <!-- ACCIDENT -->
@@ -157,10 +182,12 @@
       <button class="store-btn" data-storeid="anicare6">애니카랜드 문산점</button>
       <button class="store-btn" data-storeid="anicare7">애니카랜드 법원점</button>
       <button class="store-btn" data-storeid="anicare8">하나모터스</button>
-       <button class="store-btn" data-storeid="anicare9">(주)파주자동차정비검사소</button>
+      <button class="store-btn" data-storeid="anicare9">(주)파주자동차정비검사소</button>
+     <button class="store-btn" data-storeid="anicare10">(대형)파주현대상용서비스</button>
+     <button class="store-btn" data-storeid="anicare11">(싸이카)포밸브</button>
     </div>
 
-    <!-- details: 전화번호/주소 (tel:에는 숫자만), 네이버 링크로 트래픽 최소화 -->
+    <!-- details -->
     <div id="anicare1" class="store-detail">
       <a class="phone-link" href="tel:03153903562">📞 031-943-1171</a>
       <div><small>경기 파주시 금촌동 420-1</small>
@@ -206,6 +233,18 @@
       <div><small>경기 파주시 천정구로 163-15</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20천정구로%20163-15" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
+    <div id="anicare10" class="store-detail">
+      <a class="phone-link" href="tel:0319498074">📞 031-949-8074</a>
+      <div><small>경기 파주시 월롱면 도감로 164</small>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20월롱면%20도감로%20164" target="_blank" rel="noopener">네이버지도</a></div>
+    </div>
+    <div id="anicare11" class="store-detail">
+      <a class="phone-link" href="tel:050714870014">📞 0507-1487-0014</a>
+      <div><small>경기 고양시 덕양구 호수로 225-7</small>
+      <a class="map-link" href="https://map.naver.com/v5/search/경기%20고양시%20덕양구%20호수로%20225-7" target="_blank" rel="noopener">네이버지도</a></div>
+    </div>
+
+
 
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
@@ -236,15 +275,26 @@
       <div><small>경기 파주시 천정구로 163-6</small>
       <a class="map-link" href="https://map.naver.com/v5/search/경기%20파주시%20천정구로%20163-6" target="_blank" rel="noopener">네이버지도</a></div>
     </div>
-  
 
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
-  <!-- REPAIR -->
+  <!-- REPAIR (CHANGED) -->
   <section id="repair" class="hidden">
     <div style="font-weight:800;margin-bottom:8px">🔧 특장수리</div>
-    <p>업데이트 중........</p>
+
+    <!--
+      CHANGED: 특장수리 섹션을 Q&A 스타일의 하위카테고리 + 업체정보 리스트 UI로 대체하였습니다.
+      수정 포인트:
+       - repairData 객체에서 카테고리/업체 정보를 관리 (아래 JS에 있음)
+       - repairCatBar 에 카테고리 버튼 생성, repairList 에 업체정보 표시
+       - [] 부분(업체명/전화번호)은 repairData에서 직접 수정/추가 가능
+    -->
+    <div class="repair-panel">
+      <div class="repair-cat" id="repairCatBar" aria-hidden="false"></div>
+      <div id="repairList" class="repair-list"></div>
+    </div>
+
     <button class="back-btn" onclick="backToMain()">⬅ 뒤로</button>
   </section>
 
@@ -290,28 +340,30 @@ const faqData = {
     { q:"블랙박스가 저장이 안되요", a:"차량담당에게 문의후 메모리카드 교체" }
   ],
   lift: [
-    { q:"리프트가 고장났어요", a:"리프트옆쪽에 특장업체 전화번호 확인후 AS신청" }
-    ],
+    { q:"리프트가 고장났어요", a:"리프트옆쪽에 특장업체 전화번호 확인후 AS신청" },
+   { q:"IDS가 안나와요", a:"IDS는 범예에 일단 문의 하셔야 합니다." }, 
+   { q:"주먹마이크가 고장났어요", a:"주먹마이크 여분 확인 교체 또는 새로 구매후 교체" },
+   { q:"무전기가 안돼요", a:"정장계 무선담당에게 문의하시면 됩니다." }
+  
+   ],
   tire: [
     { q:"타이어가 마모되서 교체해야 해요", a:"타이어 메뉴에서 매장검색 가까운 매장 방문 교체" },
     { q:"타이어 옆이 터졌어요", a:"오래되서 터진것이 아닌것은 애니카에서 승인을 안해줍니다(다행히 승인해주면 그냥 교체하심됨) 보험접수+발생보고+온나라공문 후 타이어 교체" }
   ],
   microphone: [
-    { q:"주먹마이크가 고장났어요", a:"주먹마이크 여분 확인 교체 또는 새로 구매후 교체" },
-    { q:"무전기가 안돼요", a:"정장계 무선담당에게 문의하시면 됩니다." }
+   
   ],
   wash: [
     { q:"차내부가 지져분해서 세차를 하고 싶어요", a:"현재 세차비는 따로 배정되지 않고 있습니다. 수리비에서 지급중인데요 세차가 필요하시면 세차요청서 하나 보내주시고 카드 받아가서 세차하시고 카드+영수증 반납하시면 됩니다." }
   ],
   etc: [
-    { q:"IDS가 안나와요", a:"IDS는 범예에 일단 문의 하셔야 합니다." },
-    { q:"무전기가 안돼요", a:"무전기는 정장계 무선담당에게 문의하시면 됩니다." },
     { q:"사고가 났어요(피해차량)", a:"(피해차량인 경우) 폴넷 교통사고 발생보고 - 온나라 공문(대차료 때문) - 공업사 입고 수리" },
     { q:"사고가 났어요(가해차량)", a:"(가해차량인 경우) 폴넷 교통사고 발생보고 - 온나라공문(수리비 때문) - 공업사 입고수리 - 차량담당에게 통보" },
     { q:"유리가 파손됬어요", a:"유리파손의 경우 수리비가 많이 나와서 자차보험으로 처리하는게 수리비가 적게듭니다. 폴넷 교통사고 발생보고 - 온나라공문(수리비 때문) - 차량담당이 견적접수 후 통보 - 수리진행" },
     { q:"후방카메라가 안나와요", a:"기존 차량부품은 애니카 점검 후에 수리가능여부 판단. 수리안될시 차량담당에게 통보후 - 현대 블루핸즈에서 수리" },
-    { q:"추석연휴에 정비업소가 없어서 수리를 못해요", a:"순찰차의 경우는 임시조치로 근처 공업사 방문 나중 결제할수 있는 곳을 찾아서 긴급 수리를 받으시고 나중에 승인팀에 청구할수 있습니다. 순찰차외 공용차는 안되요!!" },
-    { q:"데칼(마크)가 손상됐어요", a:"데칼(마크) 까지 수리하실려면 조리읍에 있는 두원현대서비스에서 수리하시면 됩니다." }
+    { q:"에어컨이 고장났어요", a:"에어컨등 기존 차량관련 수리는 애니카에서 점검 후 수리합니다. 일단 애니카로 고고씽" },
+   { q:"번호판 색이 지워졌어여", a:"번호판 교체시 차량담당통보 - 차량등록증,법인등록증,결제카드 수령후 교체(교체시 교체 전,후 사진 필요함!) - 차량담당에게 영수증등 반납" },
+   { q:"데칼(마크)가 손상됐어요", a:"데칼(마크) 까지 수리하실려면 조리읍에 있는 두원현대서비스에서 수리하시면 됩니다." }
        ]
 };
 
@@ -325,7 +377,6 @@ const anicareStores = [
   { id:'anicare7', name:'애니카랜드 법원점', phoneDisplay:'031-958-5711', phoneTel:'0319585711' },
   { id:'anicare8', name:'하나모터스', phoneDisplay:'031-948-6936', phoneTel:'0319486936' },
   { id:'anicare9', name:'(주)파주자동차정비검사소', phoneDisplay:'031-949-3115', phoneTel:'0319493115' }
-
 ];
 
 const tireStores = [
@@ -343,6 +394,63 @@ const holidaySchedule = {
   '8': { anicare: ['anicare3', 'anicare7', 'anicare8'], tire: [] },
   '9': { anicare: ['anicare7', 'anicare8'], tire: ['tire1','tire2','tire3'] }
 };
+
+/* ===========================
+   NEW: 특장수리 데이터 (여기만 수정하면 하위메뉴/업체추가 가능)
+   ===========================
+   - 키(blackbox, lift 등)는 임의로 추가 가능
+   - label: 화면에 보이는 텍스트
+   - vendors: 업체 배열 (year,name, phoneDisplay, phoneTel)
+   - [] 안의 내용을 바로 이곳에서 편집/추가하시면 됩니다.
+*/
+const repairData = {
+  blackbox: {
+    label: '블랙박스',
+    vendors: [
+      { year: '2019 ~ 2024', name: '모트렉스', phoneDisplay: '02-6959-1122', phoneTel: '0269591122' }
+      ]
+  },
+  lift: {
+    label: '리프트 경광등(112중형)',
+    vendors: [
+      { year: '2019 ~ 2024', name: '현도산업', phoneDisplay: '031-594-3655', phoneTel: '0315943655' }
+    ]
+  },
+  beacon_small: {
+    label: '경광등(112소형)',
+    vendors: [
+      { year: '2019, 2023~24', name: '성화기술산업', phoneDisplay: '02-662-8717', phoneTel: '026628717' },
+      { year: '2021', name: '현도산업', phoneDisplay: '031-594-3655', phoneTel: '0315943655' }
+    ]
+  },
+  tablet_mount: {
+    label: '태블릿 거치대 / 통합디바이스',
+    vendors: [
+      { year: '2019 ~ 2024', name: '모트렉스', phoneDisplay: '02-6959-1122', phoneTel: '0269591122' }
+    ]
+  },
+  decal: {
+    label: '데칼',
+    vendors: [
+      { year: '2019 ~ 2021', name: '태건', phoneDisplay: '02-2671-8420', phoneTel: '0226718420' },
+      { year: '2022 ~ 2023', name: '현도산업', phoneDisplay: '031-594-3655', phoneTel: '0315943655' },
+     { year: '2024', name: '마바산업', phoneDisplay: '010-8909-8058', phoneTel: '01089098058' }
+    ]
+  },
+  multicam: {
+    label: '멀티캠',
+    vendors: [
+      { year: '2019 ~ 2024', name: '나눔컴퍼니', phoneDisplay: '02-701-0521', phoneTel: '027010521' }
+    ]
+  },
+  radio_box: {
+    label: '무전기박스 등(기타 all)',
+    vendors: [
+      { year: '2019 ~ 2024', name: '영일특장', phoneDisplay: '02-716-5001', phoneTel: '027165001' }
+    ]
+  }
+};
+/* =========================== END repairData =========================== */
 
 /* ===========================
    렌더/유틸 (DOM ready 후 초기화)
@@ -502,6 +610,61 @@ function renderFAQ(){
   });
 }
 
+/* ===========================
+   NEW: renderRepair() - 특장수리 UI 렌더링
+   - repairData를 편집하면 하위메뉴/업체가 바뀝니다.
+   =========================== */
+function renderRepair(){
+  const catBar = document.getElementById('repairCatBar');
+  const list = document.getElementById('repairList');
+  if(!catBar || !list) return;
+  catBar.innerHTML = '';
+  list.innerHTML = '';
+
+  const keys = Object.keys(repairData);
+  keys.forEach((k, idx) => {
+    const entry = repairData[k];
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.textContent = entry.label || k;
+    btn.onclick = function(){
+      // active visuals
+      document.querySelectorAll('.repair-cat .cat-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      // render vendors
+      list.innerHTML = '';
+      const vendors = entry.vendors || [];
+      if(vendors.length === 0){
+        const no = document.createElement('div'); no.className = 'repair-item';
+        no.textContent = '업체 정보가 없습니다. repairData.' + k + ' 에 vendors 를 추가하세요.';
+        list.appendChild(no);
+        return;
+      }
+      vendors.forEach(v => {
+        const item = document.createElement('div'); item.className = 'repair-item';
+        // one-line format: 차량연식: [year] / 업체명: [name] / 전화번호: [tel] (tel 링크)
+        const info = document.createElement('div'); info.className = 'repair-info';
+        // safe text (no HTML injection assumptions - but since user edits locally it's fine)
+        const phoneHref = (v.phoneTel || '').replace(/[^0-9+]/g,'');
+       // 차량연식 표시 - 값이 없으면 '-' 또는 빈문자열로 표시
+        const yearText = v.year ? escapeHtml(v.year) : '-';
+        info.innerHTML = `<span>차량연식:</span> ${yearText} &nbsp;&nbsp; <span>업체명:</span> ${escapeHtml(v.name)} &nbsp;&nbsp; <span>전화번호:</span> <a href="tel:${phoneHref}">${escapeHtml(v.phoneDisplay || v.phoneTel || '')}</a>`;
+        item.appendChild(info);
+        list.appendChild(item);
+      });
+    };
+    catBar.appendChild(btn);
+    if(idx === 0) btn.click(); // activate first
+  });
+}
+
+/* small helper to avoid accidental HTML injection when rendering strings */
+function escapeHtml(str){
+  if(!str && str !== 0) return '';
+  return String(str).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]); });
+}
+/* =========================== END renderRepair() =========================== */
+
 /* init */
 document.addEventListener('DOMContentLoaded', function(){
   // main menu click handlers
@@ -537,6 +700,9 @@ document.addEventListener('DOMContentLoaded', function(){
   // render Q&A content
   renderFAQ();
 
+  // render repair UI (CHANGED)
+  renderRepair();
+
   // ensure mainMenu visible on load
   document.getElementById('mainMenu').style.display = 'flex';
   document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
@@ -548,12 +714,7 @@ window.anicareStores = anicareStores;
 window.tireStores = tireStores;
 window.holidaySchedule = holidaySchedule;
 window.faqData = faqData;
+window.repairData = repairData; // expose so user can edit via console if desired
 </script>
 </body>
 </html>
-
-
-
-
-
-
